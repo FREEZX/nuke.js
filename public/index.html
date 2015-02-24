@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+	
+	<script type="text/javascript" src="/primus/primus.js"></script>
+	<script type="text/javascript">
+		'use strict';
+		var primus = new Primus(window.location.protocol+'//'+window.location.host);
+		primus.on('open', function(){
+			primus.write({path: '/article/123'});
+		});
+		primus.on('data', function(data) {
+			console.log(data);
+		});
+	</script>
+</body>
+</html>
