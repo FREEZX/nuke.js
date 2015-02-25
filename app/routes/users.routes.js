@@ -11,6 +11,7 @@ module.exports = function(app) {
 
 	crossroads.addRoute('/auth/signin', users.signin);
 	crossroads.addRoute('/auth/signup', users.signup);
+	crossroads.addRoute('/auth/signout', users.signout);
 	crossroads.addRoute('/users/me', users.me);
 	// User Routes
 	// 

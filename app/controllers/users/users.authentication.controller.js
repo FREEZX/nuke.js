@@ -26,7 +26,7 @@ exports.signup = function(spark, message) {
 	// Then save the user 
 	user.save(function(err) {
 		if (err) {
-			spark.status(400).error({message: errorHandler.getErrorMessage(err)}, message.seq);
+			spark.status(400).error({message: errorHandler.getErrorMessage(err)}, message);
 		} else {
 			// Remove sensitive data before login
 			user.password = undefined;
@@ -34,9 +34,9 @@ exports.signup = function(spark, message) {
 
 			spark.request.login(user, function(err) {
 				if (err) {
-					spark.status(400).error(err, message.seq);
+					spark.status(400).error(err, message);
 				} else {
-					spark.response(user, message.seq);
+					spark.response(user, message);
 				}
 			});
 		}
@@ -49,7 +49,7 @@ exports.signup = function(spark, message) {
 exports.signin = function(spark, message) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err || !user) {
-			spark.status(400).error(info);
+			spark.status(400).error(info, message);
 			// res.status(400).send(info);
 		} else {
 			// Remove sensitive data before login
@@ -58,9 +58,9 @@ exports.signin = function(spark, message) {
 
 			spark.request.login(user, function(err) {
 				if (err) {
-					spark.status(400).response(err, message.seq);
+					spark.status(400).response(err, message);
 				} else {
-					spark.response(user, message.seq);
+					spark.response(user, message);
 				}
 			});
 		}
@@ -70,9 +70,9 @@ exports.signin = function(spark, message) {
 /**
  * Signout
  */
-exports.signout = function(spark) {
+exports.signout = function(spark, message) {
 	spark.request.logout();
-	// res.redirect('/');
+	spark.response({}, message);
 };
 
 // /**
