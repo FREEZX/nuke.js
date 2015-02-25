@@ -10,6 +10,7 @@ var config = require('./config');
 var session = require('./middleware/session');
 var cookies = require('./middleware/cookies');
 var response = require('./middleware/primus-response');
+var _ = require('lodash');
 
 module.exports = function(server) {
 	var rtg = url.parse(config.redis);
@@ -42,8 +43,7 @@ module.exports = function(server) {
 	primus.on('connection', function(spark){
 		spark.on('data', function(message){
 			if(message.path){
-				console.log('parsing ' + message.path);
-				spark.request.body = message.data;
+				spark.request.body = _.omit(message.data, 'seq');
 				crossroads.parse(message.path, [spark, message]);
 			}
 		});

@@ -12,13 +12,12 @@ var _ = require('lodash'),
 /**
  * Signup
  */
-exports.signup = function(spark) {
+exports.signup = function(spark, message) {
 	// For security measurement we remove the roles from the req.body object
 	delete spark.request.body.roles;
 
 	// Init Variables
 	var user = new User(spark.request.body);
-	var message = null;
 
 	// Add missing user fields
 	user.provider = 'local';
@@ -27,7 +26,7 @@ exports.signup = function(spark) {
 	// Then save the user 
 	user.save(function(err) {
 		if (err) {
-			spark.write({status: 400, data: {message: errorHandler.getErrorMessage(err)}});
+			spark.status(400).error({message: errorHandler.getErrorMessage(err)}, message.seq);
 		} else {
 			// Remove sensitive data before login
 			user.password = undefined;
@@ -35,9 +34,9 @@ exports.signup = function(spark) {
 
 			spark.request.login(user, function(err) {
 				if (err) {
-					spark.write({status: 400, data: err});
+					spark.status(400).error(err, message.seq);
 				} else {
-					spark.write({status: 200, data: user});
+					spark.response(user, message.seq);
 				}
 			});
 		}
@@ -47,11 +46,11 @@ exports.signup = function(spark) {
 /**
  * Signin after passport authentication
  */
-exports.signin = function(spark) {
+exports.signin = function(spark, message) {
 	passport.authenticate('local', function(err, user, info) {
 		console.log('u wot');
 		if (err || !user) {
-			spark.write({status: 400, data: info});
+			spark.status(400).error(info);
 			// res.status(400).send(info);
 		} else {
 			// Remove sensitive data before login
@@ -60,9 +59,9 @@ exports.signin = function(spark) {
 
 			spark.request.login(user, function(err) {
 				if (err) {
-					spark.write({status: 200, data: err});
+					spark.status(400).response(err, message.seq);
 				} else {
-					spark.write({status: 200, data: user});
+					spark.response(user, message.seq);
 				}
 			});
 		}
@@ -74,7 +73,7 @@ exports.signin = function(spark) {
  */
 exports.signout = function(spark) {
 	spark.request.logout();
-	res.redirect('/');
+	// res.redirect('/');
 };
 
 // /**

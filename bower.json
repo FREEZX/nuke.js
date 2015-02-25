@@ -1,0 +1,20 @@
+{
+  "name": "remp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/FREEZX/romp",
+  "authors": [
+    "Kristijan Trajkovski <kiko_trajkovski@hotmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "q": "1.0.1"
+  }
+}

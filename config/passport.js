@@ -15,7 +15,7 @@ module.exports = function() {
 	passport.deserializeUser(function(id, done) {
 		User.findOne({
 			_id: id
-		}).populate({path: 'map', select: 'displayName'}).exec(function(err, user) {
+		}, '-salt -password', function(err, user) {
 			done(err, user);
 		});
 	});

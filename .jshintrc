@@ -20,6 +20,7 @@
 	"globals": { // Globals variables.
 		"_": true,
 		"$": true,
+		"Q": true,
 		"Primus": true
 	},
 	"indent": 4, // Specify indentation spacing

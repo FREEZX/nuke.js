@@ -1,24 +1,60 @@
 'use strict';
 
 var store = require('./session-store')();
+var _ = require('lodash');
 
 module.exports = {
   server: function(primus){
     var Spark = primus.Spark;
-    Spark.prototype.response = function (status, message) {
-      var seq = this.request.body.seq || 0;
-      this.write({status: status, data: message, seq: seq});
+    Spark.prototype._status = 200;
+    Spark.prototype.status = function (status) {
+      this._status = status;
+      return this;
     };
-    Spark.prototype.error = function (message, seq) {
+    Spark.prototype.response = function (message, reqmsg) {
+      var seq = reqmsg.seq || 0;
+      this.write({status: this._status, data: message, seq: seq});
+      this._status = 200;
+    };
+    Spark.prototype.error = function (message, reqmsg) {
+      var seq = reqmsg.seq || 0;
       this.write({error: message, seq: seq});
+      this._status = 200;
     };
   },
   client: function(primus){
-    primus.transform('outgoing', function (packet) {
-      primus.seq = primus.seq+1 || 0;
-      packet.data = packet.data || {};
-      packet.data.data = packet.data.data || {};
-      packet.data.data.seq = primus.seq;
-    });
+    primus.request = function(path, data, callback) {
+      if(typeof(data) === 'function') {
+        callback = data;
+        data = {};
+      }
+      var self = primus;
+      var deferred = Q.defer();
+
+      if(self.writable) {
+        var timeout;
+        var listener = function(data){
+          clearTimeout(timeout);
+          if(data.seq === seq) {
+            if(data.error) {
+              deferred.reject(data.error);
+            }
+            else {
+              deferred.resolve(data.data);
+            }
+            primus.removeListener('data', listener);
+          }
+        };
+        primus.seq = primus.seq+1 || 0;
+        var seq = primus.seq;
+        timeout = setTimeout(function(){
+          listener({error: 'Server did not respond', seq: seq});
+        }, 2000);
+        self.on('data', listener);
+        self.write({path: path, data: data, seq: seq}); 
+      }
+
+      return deferred.promise;
+    };
   }
 };

@@ -9,12 +9,9 @@ var crossroads = require('crossroads');
 module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 
-	crossroads.addRoute('/auth/signin', function(spark){
-		users.signin(spark);
-	});
-	crossroads.addRoute('/auth/signup', function(spark){
-		users.signup(spark);
-	});
+	crossroads.addRoute('/auth/signin', users.signin);
+	crossroads.addRoute('/auth/signup', users.signup);
+	crossroads.addRoute('/users/me', users.me);
 	// User Routes
 	// 
 
