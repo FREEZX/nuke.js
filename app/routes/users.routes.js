@@ -7,7 +7,7 @@ var crossroads = require('crossroads');
 // var passport = require('passport');
 
 module.exports = function(app) {
-	var users = require('../../app/controllers/users.server.controller');
+	var users = require('../controllers/users');
 
 	crossroads.addRoute('/auth/signin', users.signin);
 	crossroads.addRoute('/auth/signup', users.signup);

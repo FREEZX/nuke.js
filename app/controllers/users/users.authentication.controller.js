@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	errorHandler = require('../errors.server.controller'),
+	errorHandler = require('../errors.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User');
@@ -48,7 +48,6 @@ exports.signup = function(spark, message) {
  */
 exports.signin = function(spark, message) {
 	passport.authenticate('local', function(err, user, info) {
-		console.log('u wot');
 		if (err || !user) {
 			spark.status(400).error(info);
 			// res.status(400).send(info);

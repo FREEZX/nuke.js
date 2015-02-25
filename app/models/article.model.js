@@ -1,29 +1,34 @@
 'use strict';
 
+/**
+ * Module dependencies.
+ */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-
 /**
- * Occupation Schema
+ * Article Schema
  */
 var ArticleSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Occupation name',
-		trim: true
-	},
 	created: {
 		type: Date,
 		default: Date.now
 	},
+	title: {
+		type: String,
+		default: '',
+		trim: true,
+		required: 'Title cannot be blank'
+	},
+	content: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	},
-	ancestors: [{ type: Schema.Types.ObjectId, ref: 'Occupation' }],
-	parent: { type: String, default: '#' }
+	}
 });
 
 mongoose.model('Article', ArticleSchema);

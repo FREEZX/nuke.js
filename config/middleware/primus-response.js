@@ -36,13 +36,13 @@ module.exports = {
         var listener = function(data){
           clearTimeout(timeout);
           if(data.seq === seq) {
+            primus.removeListener('data', listener);
             if(data.error) {
               deferred.reject(data.error);
             }
             else {
               deferred.resolve(data.data);
             }
-            primus.removeListener('data', listener);
           }
         };
         primus.seq = primus.seq+1 || 0;
