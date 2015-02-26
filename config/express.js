@@ -1,10 +1,11 @@
 'use strict';
 
+var path = require('path');
 var express = require('express');
+var consolidate = require('consolidate');
 var session = require('./middleware/session');
 var cookies = require('./middleware/cookies');
 var config = require('./config');
-var path = require('path');
 
 var savedApp;
 module.exports = function() {
@@ -12,9 +13,19 @@ module.exports = function() {
 		return savedApp;
 	}
 	var app = express();
+
+	app.locals.assets = config.assets;
+
 	app.use(cookies());
 	app.use(session());
 	app.use(express.static('public'));
+
+	// Set swig as the template engine
+	app.engine('swig', consolidate.swig);
+
+	// Set views path and view engine
+	app.set('view engine', 'swig');
+	app.set('views', './app/views');
 
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {

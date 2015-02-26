@@ -7,5 +7,12 @@ module.exports = {
 	cookie: {},
 	db: {
 		uri: process.env.MONGO_URL || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/remp'
+	},
+	assets: {
+		js: [
+			'js/bundle.js',
+			'lib/q/q.js'
+		],
+		css: []
 	}
 };
