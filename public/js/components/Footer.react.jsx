@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -8,10 +9,19 @@
  */
 
 var React = require('react');
+var ReactPropTypes = React.PropTypes;
 
-var App = require('./components/App.react');
+var Footer = React.createClass({
+  /**
+   * @return {object}
+   */
+  render: function() {
+  	return (
+      <footer id="footer">
+      </footer>
+    );
+  },
 
-React.render(
-  <App />,
-  document.getElementById('app')
-);
+});
+
+module.exports = Footer;

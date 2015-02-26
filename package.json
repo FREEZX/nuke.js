@@ -37,7 +37,7 @@
     "watchify": "^2.1.1"
   },
   "scripts": {
-    "watch": "watchify -o public/js/bundle.js -v -d .",
+    "watch": "watchify -o public/js/bundle.js -v -d . --extension=.jsx",
     "start": "npm run watch & nodemon server.js",
     "build": "NODE_ENV=production browserify . | uglifyjs -cm > public/js/bundle.min.js",
     "test": "jest"

@@ -10,8 +10,10 @@ module.exports = {
 	},
 	assets: {
 		js: [
-			'js/bundle.js',
-			'lib/q/q.js'
+			'lib/lodash/lodash.js',
+			'lib/q/q.js',
+			'/primus/primus.js',
+			'js/bundle.js'
 		],
 		css: []
 	}

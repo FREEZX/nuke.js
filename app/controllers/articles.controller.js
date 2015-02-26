@@ -12,13 +12,10 @@ var mongoose = require('mongoose'),
  * Create a article
  */
 exports.create = function(spark, message) {
-	console.log('creating article');
 	var article = new Article(message.data);
 	article.user = spark.request.user;
 
-	console.log('saving?');
 	article.save(function(err) {
-		console.log('saved?');
 		if (err) {
 			console.log(err);
 			return spark.status(400).response({
@@ -77,7 +74,7 @@ exports.delete = function(spark, message) {
  * List of Articles
  */
 exports.list = function(spark, message) {
-	Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
+	Article.find().sort('-created').limit(30).populate('user', 'displayName').exec(function(err, articles) {
 		if (err) {
 			return spark.status(400).response({
 				message: errorHandler.getErrorMessage(err)

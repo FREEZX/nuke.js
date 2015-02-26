@@ -9,8 +9,9 @@
 </head>
 <body>
 	{% block content %}
+	{% endblock %}
 	{% for js in assets.js %}
-		<script type="text/javascript" src="{{js}}" />
+		<script type="text/javascript" src="{{js}}"></script>
 	{% endfor %}
 </body>
 </html>
