@@ -19,6 +19,9 @@ var Footer = require('./Footer.react');
 var Header = require('./Header.react');
 var ArticleList = require('./ArticleList.react');
 var ArticleForm = require('./ArticleForm.react');
+var SignupForm = require('./SignupForm.react');
+var SigninForm = require('./SigninForm.react');
+var SignoutButton = require('./SignoutButton.react');
 var React = require('react');
 var ArticleActions = require('../actions/ArticleActions');
 var ArticleStore = require('../stores/ArticleStore');
@@ -49,6 +52,9 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
+        <SignupForm />
+        <SigninForm />
+        <SignoutButton />
         <ArticleList />
         <ArticleForm />
       </div>
