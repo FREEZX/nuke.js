@@ -222,7 +222,9 @@ As you can see, most of these functions should differ from what you may be used 
 `message` contains the whole raw message that the has been sent from the browser. The data you're sending from your client scripts is located in `message.data` (this is your message body), whereas `message.route` and `message.seq` contain the requested route and message sequence number accordingly. Most often you will only need `message.data`.
 
 If you need to send a response to the request, you do that by using either `spark.response(data, message)`, for normal response or `spark.error(data, message)` for rejected response. You can put anything you wish in the data, but the `message` parameter can either be:
+
 1. left blank (in which case the client would receive the data you send, but **NOT AS A RESPONSE TO YOUR ORIGINAL REQUEST**, you can only catch it if you have set a `primus.on('data')` listener yourself)
+
 2. pass the original message you got, which contains the sequence number of the original message in the *seq* field, so this will be considered as a resolution to the original promise on the client side.
 
 ### Routes
@@ -306,4 +308,4 @@ Our framework exposes a custom `request` method on the `primus` object, which ta
 
 The framework is a work in progress, but should be stable enough to work with.
 
-REMP was inspired and is heavily influenced by Mean.js for code structure and organization.
+nuke was inspired and is heavily influenced by mean.js for code structure and organization.
