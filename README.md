@@ -1,11 +1,15 @@
-# REMP - React, Express, Mongoose, Primus
+# nuke.js - the sockets-based web framework
 
-REMP is a full-stack web framework, optimized for high speed transfer with less overhead.
+nuke.js is a full-stack web framework, optimized for high speed transfer with less overhead.
 
 ## Features
  - React optimized workflow
  - Mongoose models
  - Primus messaging to replace all traditional HTTP requests
+ - React frontend
+ - express dynamic pages
+ - mongoose models
+ - primus messaging for all purposes
 
 ## Getting started
 

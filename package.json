@@ -1,7 +1,7 @@
 {
-  "name": "remp",
+  "name": "nukejs",
   "version": "0.0.1",
-  "description": "Hax game",
+  "description": "High-speed realtime framework",
   "main": "public/js/app.js",
   "postinstall": "bower install",
   "dependencies": {
