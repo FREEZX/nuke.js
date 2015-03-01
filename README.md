@@ -309,6 +309,8 @@ Our framework exposes a custom `request` method on the `primus` object, which ta
 If you are building a big project, you will most likely benefit from putting resources up on a CDN.
 We have an integrated build script that will take all css and included external urls and place everything together in the dist folder while minifying all the css into one file, and will take all the javascript files included in your `development` config file, except for those that end with `#nomin`, and minify them and place the output in `public/dest/js/min.js`.
 
+To run the build script execute `npm run build`.
+
 ## Acknowledgements
 
 The framework is a work in progress, but should be stable enough to work with.
