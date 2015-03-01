@@ -50,7 +50,6 @@ exports.signin = function(spark, message) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err || !user) {
 			spark.status(400).error(info, message);
-			// res.status(400).send(info);
 		} else {
 			// Remove sensitive data before login
 			user.password = undefined;

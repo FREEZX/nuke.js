@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+	appName: 'Nuke.js app',
 	port: process.env.PORT || 3000,
 	redis: '',
 	sessionSecret: 'g1i23fg9as68egj',
@@ -17,6 +18,7 @@ module.exports = {
 			'js/bundle.js'
 		],
 		css: [
+			'lib/bootstrap/dist/css/bootstrap.css',
 			'css/global.css'
 		]
 	}

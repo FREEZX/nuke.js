@@ -3,10 +3,12 @@
 var path = require('path');
 var express = require('express');
 var consolidate = require('consolidate');
+var _ = require('lodash');
 var filters = require('./filters');
 var session = require('./middleware/session');
 var cookies = require('./middleware/cookies');
 var config = require('./config');
+var passport = require('passport');
 
 var savedApp;
 module.exports = function() {
@@ -15,12 +17,13 @@ module.exports = function() {
 	}
 	var app = express();
 
-	app.locals.assets = config.assets;
-	app.locals.cdn_base = config.cdn_base;
+	app.locals = _.extend(app.locals, config);
 
 	app.use(cookies());
 	app.use(session());
 	app.use(express.static('public'));
+	app.use(passport.initialize());
+	app.use(passport.session());
 
 	// Set swig as the template engine
 	app.engine('swig', consolidate.swig);
