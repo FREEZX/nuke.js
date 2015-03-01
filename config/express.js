@@ -3,6 +3,7 @@
 var path = require('path');
 var express = require('express');
 var consolidate = require('consolidate');
+var filters = require('./filters');
 var session = require('./middleware/session');
 var cookies = require('./middleware/cookies');
 var config = require('./config');
@@ -15,6 +16,7 @@ module.exports = function() {
 	var app = express();
 
 	app.locals.assets = config.assets;
+	app.locals.cdn_base = config.cdn_base;
 
 	app.use(cookies());
 	app.use(session());
