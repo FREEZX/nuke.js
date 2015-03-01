@@ -64,19 +64,20 @@ var buildCssAssets = function(cssPath){
       }
     }
     if(rule.declarations) {
-      var urlsregex = /url\('.+?'\)/ig;
-      var nourlRegex = /'.*?['?#]/ig;
+      var urlsregex = /url\(.+?\)/ig;
+      var nourlRegex = /\(.*?[\)?#]/ig;
       for(i=0; i<rule.declarations.length; ++i) {
-        if(rule.declarations[i].property === 'src') {
-          var matches = rule.declarations[i].value.match(urlsregex);
-          if(matches){
-            for(var j=0; j<matches.length; ++j){
-              var nourlMatch = matches[j].match(nourlRegex)[0];
-              if(nourlMatch) {
-                nourlMatch = nourlMatch.substring(1, nourlMatch.length - 1);
-                assets[nourlMatch] = true;
-              }
+        var matches = rule.declarations[i].value.match(urlsregex);
+        if(matches){
+          for(var j=0; j<matches.length; ++j) {
+            //Strip braces
+            var nourlMatch = matches[j].match(nourlRegex)[0];
+            nourlMatch =nourlMatch.substring(1, nourlMatch.length - 1);
+            //Strip apostrophe chars
+            if(nourlMatch.charAt(0) === '\'') {
+              nourlMatch =nourlMatch.substring(1, nourlMatch.length - 1);
             }
+            assets[nourlMatch] = true;
           }
         }
       }
