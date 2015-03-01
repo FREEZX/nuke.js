@@ -1,4 +1,5 @@
 'use strict';
+
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -14,14 +15,15 @@
  */
 
 /* jshint quotmark:false */
-
+var Router = require('react-router');
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
+var Link = Router.Link;
 var Footer = require('./Footer.react');
 var Header = require('./Header.react');
 var ArticleList = require('./ArticleList.react');
 var ArticleForm = require('./ArticleForm.react');
 var SignupForm = require('./SignupForm.react');
-var SigninForm = require('./SigninForm.react');
-var SignoutButton = require('./SignoutButton.react');
 var React = require('react');
 var ArticleActions = require('../actions/ArticleActions');
 var ArticleStore = require('../stores/ArticleStore');
@@ -34,6 +36,7 @@ primus.on('open', function(){
 });
 
 var App = React.createClass({
+  mixins: [ Router.State ],
 
   // getInitialState: function() {
   // },
@@ -50,13 +53,13 @@ var App = React.createClass({
    * @return {object}
    */
   render: function() {
+    var name = this.getRoutes().reverse()[0].name;
     return (
       <div>
+        <Header />
         <SignupForm />
-        <SigninForm />
-        <SignoutButton />
-        <ArticleList />
-        <ArticleForm />
+        <RouteHandler key={name}/>
+        <Footer />
       </div>
   	);
   },

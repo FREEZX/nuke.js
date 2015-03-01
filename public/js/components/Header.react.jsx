@@ -9,6 +9,8 @@
  */
 
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 
 var Header = React.createClass({
 
@@ -26,7 +28,7 @@ var Header = React.createClass({
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a href="../" className="navbar-brand">Hydra</a>
+            <Link to="/" className="navbar-brand">Nuke.js</Link>
           </div>
           <nav className="collapse navbar-collapse bs-navbar-collapse">
             <ul className="nav navbar-nav">
@@ -35,7 +37,7 @@ var Header = React.createClass({
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="#">Login</a></li>
+              <li><Link to="login">Login</Link></li>
             </ul>
           </nav>
         </div>

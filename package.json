@@ -2,7 +2,7 @@
   "name": "nukejs",
   "version": "0.0.1",
   "description": "High-speed realtime framework",
-  "main": "public/js/app.js",
+  "main": "public/js/app.jsx",
   "postinstall": "bower install",
   "dependencies": {
     "connect-redis": "^2.2.0",
@@ -19,6 +19,7 @@
     "passport-local": "^1.0.0",
     "primus": "^2.4.12",
     "primus-redis-rooms-withauth": "git://github.com/A8tech/primus-redis-rooms",
+    "react-router": "^0.12.4",
     "redis": "^0.12.1",
     "swig": "^1.4.2",
     "url": "^0.10.2",
