@@ -304,6 +304,11 @@ module.exports = flux.createStore({
 
 Our framework exposes a custom `request` method on the `primus` object, which takes two arguments, `path` and `data`, and returns a Q `promise`. The promise is either resolved or rejected depending on whether you have called `spark.response` or `spark.error` on the server, respectively. 
 
+## Building for CDN deployment
+
+If you are building a big project, you will most likely benefit from putting resources up on a CDN.
+We have an integrated build script that will take all css and included external urls and place everything together in the dist folder while minifying all the css into one file, and will take all the javascript files included in your `development` config file, except for those that end with `#nomin`, and minify them and place the output in `public/dest/js/min.js`.
+
 ## Acknowledgements
 
 The framework is a work in progress, but should be stable enough to work with.
