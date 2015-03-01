@@ -59,6 +59,7 @@ exports.signin = function(spark, message) {
 				if (err) {
 					spark.status(400).response(err, message);
 				} else {
+					spark.request.session.save();
 					spark.response(user, message);
 				}
 			});
@@ -71,6 +72,7 @@ exports.signin = function(spark, message) {
  */
 exports.signout = function(spark, message) {
 	spark.request.logout();
+	spark.request.session.save();
 	spark.response({}, message);
 };
 
