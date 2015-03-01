@@ -8,11 +8,11 @@ module.exports = {
 	db: {
 		uri: process.env.MONGO_URL || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/remp'
 	},
-	assets: {
+	assets: { //All of these must be contained in the public folder
 		js: [
+			'/primus/primus.js#nomin',
 			'lib/lodash/lodash.js',
 			'lib/q/q.js',
-			'/primus/primus.js',
 			'js/bundle.js'
 		],
 		css: []
