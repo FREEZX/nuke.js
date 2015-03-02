@@ -6,6 +6,9 @@ module.exports = {
 	redis: '',
 	sessionSecret: 'g1i23fg9as68egj',
 	cookie: {},
+	cachebox: {
+		ttl: 30
+	},
 	db: {
 		uri: process.env.MONGO_URL || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/remp'
 	},
@@ -18,8 +21,8 @@ module.exports = {
 			'js/bundle.js'
 		],
 		css: [
-			'lib/bootstrap/dist/css/bootstrap.css',
-			'css/global.css'
+			'css/global.css',
+			'lib/bootstrap/dist/css/bootstrap.css'
 		]
 	}
 };

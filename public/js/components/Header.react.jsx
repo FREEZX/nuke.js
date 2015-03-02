@@ -12,6 +12,8 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 
+var HeaderTab = require('./HeaderTab.react');
+
 var Header = React.createClass({
 
   /**
@@ -32,12 +34,11 @@ var Header = React.createClass({
           </div>
           <nav className="collapse navbar-collapse bs-navbar-collapse">
             <ul className="nav navbar-nav">
-              <li className="active">
-                <a href="#browse">Home</a>
-              </li>
+              <HeaderTab to="home">Home</HeaderTab>
+              <HeaderTab to="benchmarks">Benchmarks</HeaderTab>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li><Link to="login">Login</Link></li>
+              <HeaderTab to="login">Login</HeaderTab>
             </ul>
           </nav>
         </div>

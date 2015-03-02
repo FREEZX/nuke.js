@@ -1,3 +1,9 @@
-body{
+body {
 	padding-top: 50px;
+}
+
+.jumbotron .nuke_symbol {
+	font-size: 23em;
+	margin-top: -90px;
+	margin-bottom: -90px;
 }

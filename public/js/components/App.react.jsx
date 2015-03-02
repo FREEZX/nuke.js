@@ -57,7 +57,6 @@ var App = React.createClass({
     return (
       <div>
         <Header />
-        <SignupForm />
         <RouteHandler key={name}/>
         <Footer />
       </div>

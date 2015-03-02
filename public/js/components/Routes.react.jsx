@@ -8,9 +8,12 @@ var Link = Router.Link;
 var App = require('./App.react');
 var Login = require('./Login.react');
 var Logout = require('./Logout.react');
+var Home = require('./Home.react');
 
 var routes = (
   <Route handler={App}>
+    <Route name="home" path="/" handler={Home}/>
+    <Route name="benchmarks" handler={Home}/>
     <Route name="login" handler={Login}/>
     <Route name="logout" handler={Logout}/>
   </Route>
