@@ -2,8 +2,17 @@ body {
 	padding-top: 50px;
 }
 
+html {
+	overflow-y: scroll;
+}
+
+.input-group-addon .addon-icon {
+	width: 23px;
+	font-size: 1.5em;
+}
+
 .jumbotron .nuke_symbol {
-	font-size: 23em;
-	margin-top: -90px;
+	font-size: 20em;
+	margin-top: -30px;
 	margin-bottom: -90px;
 }

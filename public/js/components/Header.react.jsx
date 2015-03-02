@@ -30,7 +30,7 @@ var Header = React.createClass({
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link to="/" className="navbar-brand">Nuke.js</Link>
+            <Link to="/" className="navbar-brand">☢ NUKE.JS</Link>
           </div>
           <nav className="collapse navbar-collapse bs-navbar-collapse">
             <ul className="nav navbar-nav">

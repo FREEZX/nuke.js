@@ -18,10 +18,13 @@ module.exports = {
 			'/primus/primus.js#nomin#nocdn',
 			'lib/lodash/lodash.js',
 			'lib/q/q.js',
+			'lib/jquery/dist/jquery.js',
+			'lib/highcharts-release/highcharts.js',
 			'js/bundle.js'
 		],
 		css: [
 			'css/global.css',
+			'lib/fontawesome/css/font-awesome.css',
 			'lib/bootstrap/dist/css/bootstrap.css'
 		]
 	}
