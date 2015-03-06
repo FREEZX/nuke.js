@@ -11,6 +11,7 @@
     "crossroads": "git://github.com/FREEZX/crossroads.js",
     "express": "^4.12.0",
     "express-session": "^1.10.3",
+    "forever": "^0.14.1",
     "glob": "^4.4.1",
     "keymirror": "~0.1.0",
     "lodash": "^3.3.0",
@@ -43,7 +44,8 @@
   },
   "scripts": {
     "watch": "watchify -o public/js/bundle.js --extension=.msx -v -d .",
-    "start": "npm run watch & nodemon server.js",
+    "start": "node_modules/.bin/forever server.js",
+    "start-dev": "npm run watch & nodemon server.js",
     "build": "NODE_ENV=production browserify -o public/js/bundle.js -v -d . --extension=.msx && node ./build.js",
     "test": "node_modules/.bin/jest"
   },
