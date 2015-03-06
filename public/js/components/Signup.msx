@@ -49,7 +49,7 @@ var Signup = {
             <div className="col-md-offset-4 col-md-4">
               <div className="panel panel-default">
                 <div className="panel-heading">
-                  <h3 className="panel-title">Sign in</h3>
+                  <h3 className="panel-title">Sign up</h3>
                 </div>
                 <div className="panel-body">
                   <form onsubmit={ctrl.signup.bind(ctrl)}>
