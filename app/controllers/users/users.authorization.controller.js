@@ -22,7 +22,8 @@ exports.userByID = function(spark, message, id, cb) {
 /**
  * Require login routing middleware
  */
-exports.requiresLogin = function(spark, message, cb) {
+exports.requiresLogin = function(spark, message) {
+  var cb = arguments[arguments.length-1];
   if (!spark.request.isAuthenticated()) {
     var err = {
       message: 'User is not logged in'
@@ -40,7 +41,8 @@ exports.requiresLogin = function(spark, message, cb) {
 exports.hasAuthorization = function(roles) {
   var _this = this;
 
-  return function(spark, message, cb) {
+  return function(spark, message) {
+    var cb = arguments[arguments.length-1];
     _this.requiresLogin(spark, message, function(err) {
       if(err){
         cb(err);

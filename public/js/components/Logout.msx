@@ -1,0 +1,30 @@
+'use strict';
+var m = require('mithril.elements');
+var AppStore = require('../stores/AppStore');
+
+var Logout = {
+  controller: function (event){
+  	var self = this;
+    m.startComputation();
+  	primus.request('/auth/signout', this.state)
+  	.then(function(data){
+      AppStore.loggedin(false);
+      m.route('/');
+      m.endComputation();
+  	})
+  	.fail(function(error){
+      AppStore.loggedin(false);
+      m.route('/');
+      m.endComputation();
+  	});
+  },
+  view: function () {
+    return (
+    	<div>
+        Logging out...
+  		</div>
+    );
+  }
+};
+
+module.exports = Logout;

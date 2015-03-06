@@ -81,6 +81,7 @@ mongoose.model('Article', ArticleSchema);
 Simple, right?
 
 For more info on writing mongoose models, check the [Mongoose docs](http://mongoosejs.com/docs/models.html)
+You can cache mongodb requests by using the already-included [Mongoose cachebox](https://www.npmjs.com/package/mongoose-cachebox)
 
 ### Controllers
 

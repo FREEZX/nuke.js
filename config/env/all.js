@@ -6,6 +6,9 @@ module.exports = {
 	redis: '',
 	sessionSecret: 'g1i23fg9as68egj',
 	cookie: {},
+	cachebox: {
+		ttl: 30
+	},
 	db: {
 		uri: process.env.MONGO_URL || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/remp'
 	},
@@ -15,11 +18,14 @@ module.exports = {
 			'/primus/primus.js#nomin#nocdn',
 			'lib/lodash/lodash.js',
 			'lib/q/q.js',
+			'lib/jquery/dist/jquery.js',
+			'lib/highcharts-release/highcharts.js',
 			'js/bundle.js'
 		],
 		css: [
-			'lib/bootstrap/dist/css/bootstrap.css',
-			'css/global.css'
+			'css/global.css',
+			'lib/fontawesome/css/font-awesome.css',
+			'lib/bootstrap/dist/css/bootstrap.css'
 		]
 	}
 };

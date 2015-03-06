@@ -22,7 +22,9 @@
 		"$": true,
 		"Q": true,
 		"Primus": true,
-		"primus": true
+		"primus": true,
+		"React": true,
+		"Highcharts": true
 	},
 	"indent": 4, // Specify indentation spacing
 	"devel": true, // Allow development statements e.g. `console.log();`.
