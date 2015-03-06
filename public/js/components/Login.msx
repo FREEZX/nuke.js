@@ -1,0 +1,78 @@
+'use strict';
+
+var m = require('mithril.elements');
+var Header = require('./Header');
+var AppStore = require('../stores/AppStore');
+
+var SigninForm = {
+  controller: function(){
+    this.vm = {};
+    this.vm.username = m.prop('');
+    this.vm.password = m.prop('');
+    this.vm.success = m.prop('');
+    this.vm.error = m.prop('');
+    this.signin = function (ctrl){
+      event.preventDefault();
+      var self = this;
+      m.startComputation();
+      primus.request('/auth/signin', {username: this.vm.username(), password: this.vm.password()})
+      .then(function(data){
+        self.vm.error('');
+        self.vm.success('Successfully logged in user ' + data.displayName);
+        AppStore.loggedin(data);
+        m.endComputation();
+        m.route('/articles');
+      })
+      .fail(function(error){
+        self.vm.error('Login failed with error: ' + error.message);
+        m.endComputation();
+      });
+    };
+  },
+  view: function (ctrl) {
+    var shouldDisplaySuccess = ctrl.vm.success().length > 0;
+    var shouldDisplayError = !shouldDisplaySuccess && ctrl.vm.error().length > 0;
+    return [
+      Header.view(),
+      <div>
+        <div className="jumbotron">
+          <div className="container">
+            <div className="col-md-offset-4 col-md-4">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">Sign in</h3>
+                </div>
+                <div className="panel-body">
+                  <form role="form" onsubmit={ctrl.signin.bind(ctrl)}>
+                    <div className="form-group">
+                      <div className="input-group">
+                        <div className="input-group-addon"><i className="fa fa-user addon-icon"></i></div>
+                        <input type="text" className="form-control input-lg" name="username" placeholder="Enter username" value={ctrl.vm.username()} onchange={m.withAttr("value", ctrl.vm.username)}></input>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <div className="input-group">
+                        <div className="input-group-addon"><i className="fa fa-key addon-icon"></i></div>
+                        <input type="password" className="form-control input-lg" name="password" placeholder="Enter password" value={ctrl.vm.password()} onchange={m.withAttr("value", ctrl.vm.password)}></input>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <input type="submit" className="btn btn-success" value="Sign in"></input>
+                    </div>
+                    <div className={ctrl.vm.success() ? 'alert alert-success' : ''} role="alert">{ctrl.vm.success()}</div>
+                    <div className={ctrl.vm.error() ? 'alert alert-danger' : ''} role="alert">{ctrl.vm.error()}</div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-offset-4 col-md-4 well">
+              You can login with username: "demo" and password: "demo123"
+            </div>
+          </div>
+        </div>
+      </div>
+    ];
+  }
+};
+
+module.exports = SigninForm;

@@ -1,0 +1,95 @@
+'use strict';
+
+var AppStore = require('../stores/AppStore');
+var Header = require('./Header');
+var m = require('mithril.elements');
+
+
+var ArticlesList = {
+  controller: function () {
+    this.vm = {
+      title: m.prop(''),
+      content: m.prop('')
+    };
+
+    this.deleteArticle = function(event) {
+      event.preventDefault();
+      AppStore.deleteArticle(this._id);
+    };
+
+    this.newArticle = function(event) {
+      event.preventDefault();
+      console.log(this.vm.title());
+      AppStore.newArticle(this.vm);
+      this.vm = {
+        title: m.prop(''),
+        content: m.prop('')
+      };
+    };
+  },
+  view: function (ctrl) {
+    return [
+      Header.view(),
+      <br/>,
+      <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">Articles</div>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Content</th>
+                  <th>User</th>
+                  <th>Update</th>
+                </tr>
+              </thead>
+              <tbody>
+                {AppStore.articles.valueOf().map(function (article) {
+                  return (
+                    <tr key={article._id}>
+                      <td>{article.title}</td>
+                      <td>{article.content}</td>
+                      <td>{article.user.displayName}</td>
+                      <td>
+                        <div class="form-group">
+                          <button class="btn-sm btn-danger" onclick={ctrl.deleteArticle.bind(article)}>DELETE</button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3 className="panel-title">New article</h3>
+            </div>
+            <div className="panel-body">
+              <form role="form" onsubmit={ctrl.newArticle.bind(ctrl)}>
+                <div className="form-group">
+                  <div className="input-group">
+                    <div className="input-group-addon"><i className="fa fa-user addon-icon"></i></div>
+                    <input type="text" className="form-control input-lg" name="title" placeholder="Enter title" value={ctrl.vm.title()} onchange={m.withAttr("value", ctrl.vm.title)}></input>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <div className="input-group">
+                    <div className="input-group-addon"><i className="fa fa-key addon-icon"></i></div>
+                    <input type="text" className="form-control input-lg" name="content" placeholder="Enter content" value={ctrl.vm.content()} onchange={m.withAttr("value", ctrl.vm.content)}></input>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <input type="submit" className="btn btn-success" value="Create article"></input>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    ];
+  }
+};
+
+module.exports = ArticlesList;

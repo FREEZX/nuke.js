@@ -115,13 +115,14 @@ exports.articleByID = function(spark, message, id, cb) {
 /**
  * Article authorization middleware
  */
-exports.hasAuthorization = function(spark, message, next) {
+exports.hasAuthorization = function(spark, message) {
+	var cb = arguments[arguments.length-1];
 	if (spark.request.article.user.id !== spark.request.user.id) {
 		var err = {
 			message: 'User is not authorized'
 		};
 		spark.status(403).error(err, message);
-		return next();
+		return cb(err);
 	}
-	next();
+	cb();
 };

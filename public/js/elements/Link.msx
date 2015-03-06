@@ -1,0 +1,15 @@
+'use strict';
+
+/** @jsx m */
+var m = require('mithril.elements');
+
+var Link = m.element('Link', {
+  controller: function(state) {
+    if(state) {
+        this.to = state.to;
+    }
+  },
+  view: function(ctrl, content) {
+    return <a href={ctrl.to} config={m.route}>{content}</a>;
+  }
+});

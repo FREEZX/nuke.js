@@ -1,0 +1,17 @@
+'use strict';
+
+/** @jsx m */
+var m = require('mithril.elements');
+
+var NavLink = m.element('NavLink', {
+  controller: function(state) {
+    this.state = state;
+    this.active = m.route() === this.state.to;
+  },
+  view: function(ctrl, content) {
+    var className = ctrl.active ? 'active' : '';
+    return <li className={className}>
+      <Link state={ctrl.state}>{content}</Link>
+    </li>;
+  }
+});

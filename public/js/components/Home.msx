@@ -1,12 +1,11 @@
 'use strict';
 
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+/** @jsx m */
+var Header = require('./Header');
 
-var Home = React.createClass({
-  render: function () {
-    return (
+var Home = {
+  view: function () {
+    return [Header.view(), (
       <div>
         <div className="jumbotron">
           <div className="container">
@@ -31,18 +30,18 @@ var Home = React.createClass({
           and removes the need to retrieve session data for subsequent requests, as they all operate on the same connection. </p>
           <h1>How?</h1>
           <p>
-            We are have <a href="http://primus.io">primus</a>, <a href="http://expressjs.com/">express</a>, <a href="http://facebook.github.io/react/">react</a>, <a href="http://www.mongodb.org/">mongodb</a> and <a href="http://redis.io/">redis</a> in our stack.<br/>
-            <Link to="benchmarks">Benchmarks</Link> have proven these technologies provide the best raw performance, and provide a great feature set.
+            We are have <a href="http://primus.io">primus</a>, <a href="http://expressjs.com/">express</a>, <a href="http://lhorie.github.io/mithril/">mithril</a>, <a href="http://www.mongodb.org/">mongodb</a> and <a href="http://redis.io/">redis</a> in our stack.<br/>
+            <a href="benchmarks">Benchmarks</a> have proven these technologies provide the best balance between flexibility and performance, and provide a great feature set.
           </p>
           <h1>Swag</h1>
           <p>
             Keep this logo on your site to prove you're awesome. <br/>
-            <img src="/img/logo.png" />
+            <img src="/img/logo.png"/>
           </p>
         </div>
       </div>
-    );
+    )];
   }
-});
+};
 
 module.exports = Home;
