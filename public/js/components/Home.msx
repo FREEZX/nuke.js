@@ -18,6 +18,14 @@ var Home = {
                 <p>"Creating and using nuke.js every day is a blast!"</p>
                 <footer>Kristijan Trajkovski, creator of nuke.js</footer>
               </blockquote>
+              <div class="row">
+                <iframe src="https://ghbtns.com/github-btn.html?user=FREEZX&repo=nuke.js&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+                <iframe src="https://ghbtns.com/github-btn.html?user=FREEZX&repo=nuke.js&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://nukejs.com" data-text="The superfast full-stack framework" data-via="KTrajkovski" data-size="large">Tweet</a>
+                <script>{"!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');"}</script>
+              </div>
+              <div class="row">
+              </div>
             </div>
           </div>
         </div>
@@ -31,11 +39,11 @@ var Home = {
           <h1>How?</h1>
           <p>
             We have <a href="http://primus.io">primus</a>, <a href="http://expressjs.com/">express</a>, <a href="http://lhorie.github.io/mithril/">mithril</a>, <a href="http://www.mongodb.org/">mongodb</a> and <a href="http://redis.io/">redis</a> in our stack.<br/>
-            <a href="benchmarks">Benchmarks</a> have proven these technologies provide the best balance between flexibility and performance, and provide a great feature set.
+            <a href="benchmarks">Benchmarks</a> prove that these technologies provide top notch performance, and experience has shown that they are both flexible and provide a great feature set.
           </p>
           <h1>Swag</h1>
           <p>
-            Keep this logo on your site to prove you're awesome. <br/>
+            Put this logo up on your site to show your support for the project.<br/>
             <img src="/img/logo.png"/>
           </p>
         </div>

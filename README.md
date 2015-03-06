@@ -3,13 +3,12 @@
 nuke.js is a full-stack web framework, optimized for high speed transfer with less overhead.
 
 ## Features
- - React optimized workflow
  - Mongoose models
  - Primus messaging to replace all traditional HTTP requests
- - React frontend
  - express dynamic pages
  - mongoose models
  - primus messaging for all purposes
+ - Mithril frontend out of the box
 
 ## Getting started
 
@@ -26,9 +25,9 @@ Let's start with a quick overview of the folder structure:
     ├── env             (Defines NODE_ENV-specific configurations. Everything extends on top of all.js)
     ├── middleware      (Defines middleware, mainly for primus and express)
     ├── strategies      (Passport.js login strategies)
-├── public              (All css, bower modules and react libraries)
+├── public              (All css, bower modules and js cpde)
     ├── dist            (All built and minified front-end static files, ready for CDN deployment)
-    ├── js              (Front-end react app and other scripts you add)
+    ├── js              (Front-end app code and other scripts you add)
     ├── lib             (Bower dependencies destination)
 ```
 
@@ -258,62 +257,17 @@ To see how one such preprocessing could be done, refer to the `articleById` func
 
 ## Client
 
-For the client side we have standard react workflow, which you can modify to work as you please, the only important thing to note here is the way requests are made.
-The framework contains some starting code to demonstrate working signup, login, logout, and article CRUD functionality, so let's check how that works (we are using [flux_react](https://github.com/christianalfoni/flux-react) in the boilerplate code):
-
-```javascript
-var flux = require('flux-react');
-var actions = require('../actions/ArticleActions.js');
-
-module.exports = flux.createStore({
-  articles: [],
-  actions: [
-    actions.fetchArticles,
-    actions.addArticle,
-    actions.removeArticle
-  ],
-  fetchArticles: function () {
-    var self = this;
-    primus.request('/article/list').then(function(articles){
-      self.articles = articles;
-      self.emit('articles.fetch');
-    });
-  },
-  addArticle: function (article) {
-    var self = this;
-    primus.request('/article/create', article).then(function(article){
-      self.articles.unshift(article);
-      self.emit('articles.add');
-    });
-  },
-  removeArticle: function (id) {
-    var self = this;
-    primus.request('/article/delete/'+id).then(function(){
-      _.remove(self.articles, function(article){
-        return article._id === id;
-      });
-      self.emit('articles.remove');
-    });
-  },
-  exports: {
-    getArticles: function () {
-      return this.articles;
-    }
-  }
-});
-```
-
-Our framework exposes a custom `request` method on the `primus` object, which takes two arguments, `path` and `data`, and returns a Q `promise`. The promise is either resolved or rejected depending on whether you have called `spark.response` or `spark.error` on the server, respectively. 
+For the client side we have some initial mithril code that builds with [mithrilify](https://github.com/sectore/mithrilify), which you can modify and change to work as you please, the only important thing to note here is the way requests are made.
+Our framework exposes a custom `primus.request()` function, which takes two arguments, `path` and `data`, and returns a Q `promise`. The promise is either resolved or rejected depending on whether you have called `spark.response` or `spark.error` on the server, respectively.
+You could also choose to use a different front-end framework if you wish, you should just modify `package.json` with updated building options.
 
 ## Building for CDN deployment
 
 If you are building a big project, you will most likely benefit from putting resources up on a CDN.
-We have an integrated build script that will take all css and included external urls and place everything together in the dist folder while minifying all the css into one file, and will take all the javascript files included in your `development` config file, except for those that end with `#nomin`, and minify them and place the output in `public/dest/js/min.js`.
+We have an integrated build script that will take all css and included external urls and place everything together in the dist folder while minifying all the css into one file, and will take all the javascript files included in your `development` config file, except for those that end with `#nomin`, minify them, and place the output in `public/dest/js/min.js`.
 
 To run the build script execute `npm run build`.
 
 ## Acknowledgements
-
-The framework is a work in progress, but should be stable enough to work with.
 
 nuke was inspired and is heavily influenced by mean.js for code structure and organization.

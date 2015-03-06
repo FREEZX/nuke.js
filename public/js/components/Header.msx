@@ -30,6 +30,7 @@ var Header = {
             <ul className="nav navbar-nav">
               <NavLink state={{to: '/'}}>Home</NavLink>
               <NavLink state={{to: '/benchmarks'}}>Benchmarks</NavLink>
+              <NavLink state={{href: 'https://github.com/FREEZX/nuke.js'}}>Docs</NavLink>
               {articleLink}
             </ul>
             <ul className="nav navbar-nav navbar-right">

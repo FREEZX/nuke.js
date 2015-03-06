@@ -16,3 +16,7 @@ html {
 	margin-top: -30px;
 	margin-bottom: -90px;
 }
+
+a#b.btn {
+	color: #FFF !important;
+}

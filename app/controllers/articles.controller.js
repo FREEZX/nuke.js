@@ -18,7 +18,7 @@ exports.create = function(spark, message) {
 	article.save(function(err) {
 		if (err) {
 			console.log(err);
-			return spark.status(400).response({
+			return spark.status(400).error({
 				message: errorHandler.getErrorMessage(err)
 			}, message);
 		} else {
