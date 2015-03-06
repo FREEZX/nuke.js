@@ -3,7 +3,7 @@
 module.exports = {
 	appName: 'Nuke.js app',
 	port: process.env.PORT || 3000,
-	redis: '',
+	redis: process.env.REDIS_URL ||'',
 	sessionSecret: 'g1i23fg9as68egj',
 	cookie: {},
 	cachebox: {
