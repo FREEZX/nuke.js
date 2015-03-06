@@ -27,7 +27,7 @@
     "ws": "^0.7.1"
   },
   "devDependencies": {
-    "browserify": "^6.2.0",
+    "browserify": "^9.0.3",
     "clean-css": "^3.1.1",
     "css": "^2.2.0",
     "domready": "^1.0.7",
@@ -43,10 +43,10 @@
     "watchify": "^2.1.1"
   },
   "scripts": {
-    "watch": "watchify -o public/js/bundle.js --extension=.msx -v -d .",
+    "watch": "node_modules/.bin/watchify -o public/js/bundle.js --extension=.msx -v -d .",
     "start": "node_modules/.bin/forever server.js",
     "start-dev": "npm run watch & nodemon server.js",
-    "build": "NODE_ENV=production browserify -o public/js/bundle.js -v -d . --extension=.msx && node ./build.js",
+    "build": "NODE_ENV=production node_modules/.bin/browserify -o public/js/bundle.js . --extension=.msx && node ./build.js",
     "test": "node_modules/.bin/jest"
   },
   "browserify": {

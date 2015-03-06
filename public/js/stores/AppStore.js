@@ -18,7 +18,7 @@ AppStore.getLoggedUser = function(){
 AppStore.loadArticles = function(){
   m.startComputation();
   primus.request('/article/list').then(function(data){
-    AppStore.articles = data;
+    AppStore.articles = data; 
     m.endComputation();
   });
 };

@@ -57,7 +57,7 @@ exports.signin = function(spark, message) {
 
 			spark.request.login(user, function(err) {
 				if (err) {
-					spark.status(400).response(err, message);
+					spark.status(400).error({message: errorHandler.getErrorMessage(err)}, message);
 				} else {
 					spark.request.session.save();
 					spark.response(user, message);
