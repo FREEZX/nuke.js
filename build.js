@@ -65,17 +65,19 @@ var buildCssAssets = function(cssPath){
     }
     if(rule.declarations) {
       var urlsregex = /url\(.+?\)/ig;
-      var nourlRegex = /\(.*?[\)?#]/ig;
+      var nourlRegex = /\'.*?[\'?#]/ig;
       for(i=0; i<rule.declarations.length; ++i) {
         var matches = rule.declarations[i].value.match(urlsregex);
         if(matches){
           for(var j=0; j<matches.length; ++j) {
             //Strip braces
             var nourlMatch = matches[j].match(nourlRegex)[0];
-            nourlMatch =nourlMatch.substring(1, nourlMatch.length - 1);
             //Strip apostrophe chars
             if(nourlMatch.charAt(0) === '\'') {
               nourlMatch =nourlMatch.substring(1, nourlMatch.length - 1);
+            }
+            if(nourlMatch.charAt(nourlMatch.length-1) === '?' || nourlMatch.charAt(nourlMatch.length-1) === '#') {
+              nourlMatch =nourlMatch.substring(0, nourlMatch.length - 2);
             }
             assets[nourlMatch] = true;
           }

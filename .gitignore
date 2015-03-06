@@ -19,7 +19,6 @@ public/lib/
 # ======================
 config/sslcerts/*.pem
 access.log
-public/dist/
 
 # Sublime editor
 # ==============
