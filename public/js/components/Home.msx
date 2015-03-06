@@ -1,6 +1,7 @@
 'use strict';
 
 /** @jsx m */
+var m = require('mithril.elements');
 var Header = require('./Header');
 
 var Home = {
@@ -39,7 +40,7 @@ var Home = {
           <h1>How?</h1>
           <p>
             We have <a href="http://primus.io">primus</a>, <a href="http://expressjs.com/">express</a>, <a href="http://lhorie.github.io/mithril/">mithril</a>, <a href="http://www.mongodb.org/">mongodb</a> and <a href="http://redis.io/">redis</a> in our stack.<br/>
-            <a href="benchmarks">Benchmarks</a> prove that these technologies provide top notch performance, and experience has shown that they are both flexible and provide a great feature set.
+            <Link state={{to: "benchmarks"}}>Benchmarks</Link> prove that these technologies provide top notch performance, and experience has shown that they are both flexible and provide a great feature set.
           </p>
           <h1>Swag</h1>
           <p>

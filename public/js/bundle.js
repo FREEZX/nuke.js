@@ -13921,6 +13921,7 @@ module.exports = Header;
 'use strict';
 
 /** @jsx m */
+var m = require('mithril.elements');
 var Header = require('./Header');
 
 var Home = {
@@ -13959,7 +13960,7 @@ var Home = {
           {tag: "h1", attrs: {}, children: ["How?"]}, 
           {tag: "p", attrs: {}, children: [
             "We have ",{tag: "a", attrs: {href:"http://primus.io"}, children: ["primus"]}, ", ",{tag: "a", attrs: {href:"http://expressjs.com/"}, children: ["express"]}, ", ",{tag: "a", attrs: {href:"http://lhorie.github.io/mithril/"}, children: ["mithril"]}, ", ",{tag: "a", attrs: {href:"http://www.mongodb.org/"}, children: ["mongodb"]}, " and ",{tag: "a", attrs: {href:"http://redis.io/"}, children: ["redis"]}, " in our stack.",{tag: "br", attrs: {}}, 
-            {tag: "a", attrs: {href:"benchmarks"}, children: ["Benchmarks"]}, " prove that these technologies provide top notch performance, and experience has shown that they are both flexible and provide a great feature set."
+            m("Link", {state:{to: "benchmarks"}}, ["Benchmarks"]), " prove that these technologies provide top notch performance, and experience has shown that they are both flexible and provide a great feature set."
           ]}, 
           {tag: "h1", attrs: {}, children: ["Swag"]}, 
           {tag: "p", attrs: {}, children: [
@@ -13973,7 +13974,7 @@ var Home = {
 };
 
 module.exports = Home;
-},{"./Header":9}],11:[function(require,module,exports){
+},{"./Header":9,"mithril.elements":5}],11:[function(require,module,exports){
 'use strict';
 
 var m = require('mithril.elements');
