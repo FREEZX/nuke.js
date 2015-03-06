@@ -17,6 +17,9 @@ module.exports = function(){
 	var rtg = url.parse(config.redis);
 
 	var redis = Redis.createClient(rtg.port, rtg.hostname);
+  if(rtg.auth){
+    redis.auth(rtg.auth.split(':')[1]);
+  }
 
 	var store = new RedisStore({client: redis});
 
