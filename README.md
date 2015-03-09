@@ -1,6 +1,9 @@
-# nuke.js - the sockets-based web framework
+[![Logo](http://nukejs.com/img/logo.png)](http://nukejs.com/)
+The superfast full-stack framework
 
-nuke.js is a full-stack web framework, optimized for high speed transfer with less overhead.
+[![Dependencies Status](https://david-dm.org/FREEZX/nuke.js.svg)](https://david-dm.org/FREEZX/nuke.js)
+
+Nuke.js is a full-stack web framework, optimized for high speed transfer with less overhead.
 
 ## Features
  - Mongoose models
