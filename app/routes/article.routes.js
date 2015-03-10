@@ -4,7 +4,7 @@ var articles = require('../controllers/articles.controller.js');
 var users = require('../controllers/users.controller.js');
 
 module.exports = function(app) {
-	crossroads.addRoute('/article/list', articles.list);
+	crossroads.addRoute('/article/list', [users.requiresLogin, articles.list]);
 	crossroads.addRoute('/article/create', [users.requiresLogin, articles.create]);
 	crossroads.addRoute('/article/update/{articleId}', [users.requiresLogin, articles.hasAuthorization, articles.update]);
 	crossroads.addRoute('/article/delete/{articleId}', [users.requiresLogin, articles.hasAuthorization, articles.delete]);

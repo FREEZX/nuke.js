@@ -1,6 +1,7 @@
 'use strict';
 
 /** @jsx m */
+/* global Link */
 var m = require('mithril.elements');
 var Header = require('./Header');
 

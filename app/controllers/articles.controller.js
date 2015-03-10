@@ -17,7 +17,6 @@ exports.create = function(spark, message) {
 
 	article.save(function(err) {
 		if (err) {
-			console.log(err);
 			return spark.status(400).error({
 				message: errorHandler.getErrorMessage(err)
 			}, message);
@@ -104,7 +103,6 @@ exports.articleByID = function(spark, message, id, cb) {
 			err = {
   				message: 'Article not found'
   			};
-  			console.log(message);
 			return spark.status(404).error(err, message);
 		}
 		spark.request.article = article;

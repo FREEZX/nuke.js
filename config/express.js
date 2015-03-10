@@ -4,11 +4,9 @@ var path = require('path');
 var express = require('express');
 var consolidate = require('consolidate');
 var _ = require('lodash');
-var filters = require('./filters');
-var session = require('./middleware/session');
-var cookies = require('./middleware/cookies');
-var config = require('./config');
 var passport = require('passport');
+var config = require('./config');
+var filters = require('./filters');
 
 var savedApp;
 module.exports = function() {
@@ -19,11 +17,9 @@ module.exports = function() {
 
 	app.locals = _.extend(app.locals, config);
 
-	app.use(cookies());
-	app.use(session());
 	app.use(express.static('public'));
 	app.use(passport.initialize());
-	app.use(passport.session());
+	app.use(passport.authenticate('jwt'));
 
 	// Set swig as the template engine
 	app.engine('swig', consolidate.swig);

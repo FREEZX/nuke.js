@@ -15,10 +15,11 @@ public/lib/
 .bower-*/
 .idea/
 
-# MEAN.js app and assets
+# Nuke.js app and assets
 # ======================
 config/sslcerts/*.pem
 access.log
+public/js/bundle.js
 
 # Sublime editor
 # ==============

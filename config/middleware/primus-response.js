@@ -1,6 +1,5 @@
 'use strict';
 
-var store = require('./session-store')();
 var _ = require('lodash');
 
 module.exports = {

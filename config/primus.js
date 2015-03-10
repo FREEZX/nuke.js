@@ -7,8 +7,6 @@ var url = require('url');
 var crossroads = require('crossroads');
 var passport = require('passport');
 var config = require('./config');
-var session = require('./middleware/session');
-var cookies = require('./middleware/cookies');
 var response = require('./middleware/primus-response');
 var _ = require('lodash');
 
@@ -30,10 +28,8 @@ module.exports = function(server) {
 		transformer: 'websockets'
 	});
 
-	primus.before('cookies', cookies);
-	primus.before('session', session);
 	primus.before('passport_init', passport.initialize());
-	primus.before('passport_sess', passport.session());
+	primus.before('auth', passport.authenticate('jwt', {token: 'query'}));
 
 	primus.use('response', response);
 	primus.use('redis', PrimusRedisRooms);

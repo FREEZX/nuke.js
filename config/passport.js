@@ -3,9 +3,12 @@
 var passport = require('passport'),
 	User = require('mongoose').model('User'),
 	path = require('path'),
-	config = require('./config');
+	config = require('./config'),
+	JwtSession = require('passport-jwt-strategy');
 
 module.exports = function() {
+	passport.use(new JwtSession(config.sessionSecret));
+
 	// Serialize sessions
 	passport.serializeUser(function(user, done) {
 		done(null, user.id);

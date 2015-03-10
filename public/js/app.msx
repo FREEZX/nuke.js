@@ -10,7 +10,14 @@ var m = require('mithril.elements');
 require('./elements/Link');
 require('./elements/NavLink');
 
-var primus = new Primus(window.location.protocol+'//'+window.location.host);
+var primusUrl = window.location.protocol+'//'+window.location.host+'/';
+
+var token = localStorage.getItem('nuketoken');
+if(token) {
+  primusUrl = primusUrl+'?token='+token;
+}
+
+var primus = new Primus(primusUrl);
 window.primus = primus;
 
 var Header = require('./components/Header');

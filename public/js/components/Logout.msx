@@ -9,6 +9,7 @@ var Logout = {
   	primus.request('/auth/signout', this.state)
   	.then(function(data){
       AppStore.loggedin(false);
+      localStorage.removeItem('nuketoken');
       m.route('/');
       m.endComputation();
   	})

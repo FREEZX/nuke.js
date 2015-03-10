@@ -19,6 +19,7 @@ var SigninForm = {
       .then(function(data){
         self.vm.error('');
         self.vm.success('Successfully logged in user ' + data.displayName);
+        localStorage.setItem('nuketoken', data.token);
         AppStore.loggedin(data);
         m.endComputation();
         m.route('/articles');

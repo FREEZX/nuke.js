@@ -7,10 +7,10 @@ Nuke.js is a full-stack web framework, optimized for high speed transfer with le
 
 ## Features
  - Mongoose models
- - Primus messaging to replace all traditional HTTP requests
- - express dynamic pages
- - mongoose models
- - primus messaging for all purposes
+ - Express dynamic pages
+ - Mongoose models
+ - All-purpose Primus messaging
+ - Intelligent building system
  - Mithril frontend out of the box
 
 ## Getting started
@@ -267,7 +267,7 @@ You could also choose to use a different front-end framework if you wish, you sh
 ## Building for CDN deployment
 
 If you are building a big project, you will most likely benefit from putting resources up on a CDN.
-We have an integrated build script that will take all css and included external urls and place everything together in the dist folder while minifying all the css into one file, and will take all the javascript files included in your `development` config file, except for those that end with `#nomin`, minify them, and place the output in `public/dest/js/min.js`.
+We have an integrated intelligent build script that will take all css and included external files and place everything together in the dist folder while minifying all the css into one file, and will take all the javascript files included in your `development` config file, except for those that end with `#nomin`, minify them, and place the output in `public/dest/js/min.js`.
 
 To run the build script execute `npm run build`.
 
