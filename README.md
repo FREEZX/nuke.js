@@ -10,6 +10,7 @@ Nuke.js is a full-stack web framework, optimized for high speed transfer with le
  - Mongoose models
  - Express dynamic pages
  - Mongoose models
+ - JWT tokens authentication with Passport.js
  - All-purpose Primus messaging
  - Intelligent building system
  - Mithril frontend out of the box
