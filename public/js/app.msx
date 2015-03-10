@@ -14,7 +14,7 @@ var primusUrl = window.location.protocol+'//'+window.location.host+'/';
 
 var token = localStorage.getItem('nuketoken');
 if(token) {
-  primusUrl = primusUrl+'?token='+token;
+  primusUrl = primusUrl+'?accessToken='+token;
 }
 
 var primus = new Primus(primusUrl);
