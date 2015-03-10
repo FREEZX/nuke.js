@@ -7,7 +7,7 @@ var passport = require('passport'),
 	JwtSession = require('passport-jwt-strategy');
 
 module.exports = function() {
-	passport.use(new JwtSession(config.sessionSecret));
+	passport.use(new JwtSession({secret: config.sessionSecret}));
 
 	// Serialize sessions
 	passport.serializeUser(function(user, done) {
