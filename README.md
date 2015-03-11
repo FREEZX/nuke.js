@@ -17,7 +17,7 @@ Nuke.js is a full-stack web framework, optimized for high speed transfer with le
 
 ## Getting started
 
-To start up a server with the included sample app, just modify /config/env/development.js with your db url and redis url (if you can start up a local redis and mongo you don't have to change anything) and then run `npm install` and finally start it up with `npm start`
+To start up a server with the included sample app, just modify /config/env/development.js with your db url and redis url (if you can start up a local redis and mongo you don't have to change anything) and then run `npm install` and finally start it up with `npm run start-dev` in development mode (This will enable automatic compilation of frontend javascript). On your server you should start it with `npm start`.
 
 Let's start with a quick overview of the folder structure:
 ```text
@@ -36,7 +36,7 @@ Let's start with a quick overview of the folder structure:
     ├── lib             (Bower dependencies destination)
 ```
 
-Okay, with that out of the way, let's check out how our backend works.
+With folder structure out of the way, let's check out how our backend works.
 
 ## Backend
 First thing to do when starting a new project is setting up models.
@@ -89,7 +89,7 @@ You can cache mongodb requests by using the already-included [Mongoose cachebox]
 
 ### Controllers
 
-We also have a sample controller, which is a bit more specific to our framework:
+We also have a sample controller, which is a bit more specific to nuke.js:
 ```javascript
 'use strict';
 
@@ -220,9 +220,9 @@ exports.hasAuthorization = function(spark, message, next) {
 };
 ```
 
-As you can see, most of these functions should differ from what you may be used to, mainly in their parameters. Our controller functions take `spark` and `message` as their parameters:
+As you can see, most of these functions probably differ from what you may be used to, mainly in their parameters. Our controller functions take `spark` and `message` as their parameters:
 
-`spark` contains the raw primus spark object which has sent the message. In the spark's `request` field, you may find the raw request data as well as the `user` object, if the user is logged in. If you need to add new fields that should be persisted during one connection, this is where you can put them.
+`spark` contains the raw primus spark object which has sent the message. In the spark's `request` field, you may find the raw request data as well as the `user` object (set by passport), if the user is logged in. If you need to add new fields that should persist during one connection, the `primus` object is where you could put them.
 
 `message` contains the whole raw message that the has been sent from the browser. The data you're sending from your client scripts is located in `message.data` (this is your message body), whereas `message.route` and `message.seq` contain the requested route and message sequence number accordingly. Most often you will only need `message.data`.
 
@@ -230,7 +230,7 @@ If you need to send a response to the request, you do that by using either `spar
 
 1. left blank (in which case the client would receive the data you send, but **NOT AS A RESPONSE TO YOUR ORIGINAL REQUEST**, you can only catch it if you have set a `primus.on('data')` listener yourself)
 
-2. pass the original message you got, which contains the sequence number of the original message in the *seq* field, so this will be considered as a resolution to the original promise on the client side.
+2. (preferred) pass the original message you got, which contains the sequence number of the original message in the *seq* field, so this will be considered as a resolution to the original promise on the client side.
 
 ### Routes
 
@@ -272,6 +272,12 @@ If you are building a big project, you will most likely benefit from putting res
 We have an integrated intelligent build script that will take all css and included external files and place everything together in the dist folder while minifying all the css into one file, and will take all the javascript files included in your `development` config file, except for those that end with `#nomin`, minify them, and place the output in `public/dest/js/min.js`.
 
 To run the build script execute `npm run build`.
+
+Place your `public/build` folder on your CDN, and set the CDN_BASE environment variable to the root of your CDN url (It is recommended to prefix with // instead of http:// or https://)
+
+## Security
+
+Nuke.js uses JWT tokens instead of regular sessions for keeping the user id necessary for populating the `user` variable on each request. The reasoning behind this is that JWT is easier to be implemented on non-browser applications that can communicate with primus, and it also provides protection against CSRF attacks.
 
 ## Acknowledgements
 
