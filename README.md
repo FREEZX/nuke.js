@@ -279,6 +279,11 @@ Place your `public/build` folder on your CDN, and set the CDN_BASE environment v
 
 Nuke.js uses JWT tokens instead of regular sessions for keeping the user id necessary for populating the `user` variable on each request. The reasoning behind this is that JWT is easier to be implemented on non-browser applications that can communicate with primus, and it also provides protection against CSRF attacks.
 
+## Caveats
+
+Most UNIX-like systems have a `ulimit` limitation for open file descriptors. This limit needs to be removed to be able to handle a huge number of concurrent connections.
+Read up on how to make your server highly scalable in [this article](https://mrotaru.wordpress.com/category/websockets/).
+
 ## Acknowledgements
 
 nuke was inspired and is heavily influenced by mean.js for code structure and organization.
