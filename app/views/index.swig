@@ -1,5 +1,5 @@
 {% extends 'layout.swig' %}
 
 {% block content %}
-	<section id="app"></section>
+  <section id="app"></section>
 {% endblock %}

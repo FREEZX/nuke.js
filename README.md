@@ -36,7 +36,9 @@ Let's start with a quick overview of the folder structure:
     ├── lib             (Bower dependencies destination)
 ```
 
-With folder structure out of the way, let's check out how our backend works.
+It is recommended to use [editorconfig](http://editorconfig.org/) with your editor to be able to have the same file formatting across editors.
+
+With structure out of the way, let's check out how our backend works.
 
 ## Backend
 First thing to do when starting a new project is setting up models.
@@ -51,31 +53,31 @@ The frameworks contains a sample mongoose model for article objects out of the b
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 /**
  * Article Schema
  */
 var ArticleSchema = new Schema({
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	title: {
-		type: String,
-		default: '',
-		trim: true,
-		required: 'Title cannot be blank'
-	},
-	content: {
-		type: String,
-		default: '',
-		trim: true
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  title: {
+    type: String,
+    default: '',
+    trim: true,
+    required: 'Title cannot be blank'
+  },
+  content: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
 });
 
 ArticleSchema.index({created: -1});
@@ -97,126 +99,126 @@ We also have a sample controller, which is a bit more specific to nuke.js:
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	errorHandler = require('./errors.controller'),
-	Article = mongoose.model('Article'),
-	_ = require('lodash');
+  errorHandler = require('./errors.controller'),
+  Article = mongoose.model('Article'),
+  _ = require('lodash');
 
 /**
  * Create a article
  */
 exports.create = function(spark, message) {
-	var article = new Article(message.data);
-	article.user = spark.request.user;
+  var article = new Article(message.data);
+  article.user = spark.request.user;
 
-	article.save(function(err) {
-		if (err) {
-			console.log(err);
-			return spark.status(400).response({
-				message: errorHandler.getErrorMessage(err)
-			}, message);
-		} else {
-			spark.response(article, message);
-		}
-	});
+  article.save(function(err) {
+    if (err) {
+      console.log(err);
+      return spark.status(400).response({
+        message: errorHandler.getErrorMessage(err)
+      }, message);
+    } else {
+      spark.response(article, message);
+    }
+  });
 };
 
 /**
  * Show the current article
  */
 exports.read = function(spark, message) {
-	spark.response(spark.request.article, message);
+  spark.response(spark.request.article, message);
 };
 
 /**
  * Update a article
  */
 exports.update = function(spark, message) {
-	var article = spark.request.article;
+  var article = spark.request.article;
 
-	article = _.extend(article, message.data);
+  article = _.extend(article, message.data);
 
-	article.save(function(err) {
-		if (err) {
-			return spark.status(400).error({
-				message: errorHandler.getErrorMessage(err)
-			}, message);
-		} else {
-			spark.response(article, message);
-		}
-	});
+  article.save(function(err) {
+    if (err) {
+      return spark.status(400).error({
+        message: errorHandler.getErrorMessage(err)
+      }, message);
+    } else {
+      spark.response(article, message);
+    }
+  });
 };
 
 /**
  * Delete an article
  */
 exports.delete = function(spark, message) {
-	var article = spark.request.article;
+  var article = spark.request.article;
 
-	article.remove(function(err) {
-		if (err) {
-			return spark.status(400).error({
-				message: errorHandler.getErrorMessage(err)
-			}, message);
-		} else {
-			spark.response(article, message);
-		}
-	});
+  article.remove(function(err) {
+    if (err) {
+      return spark.status(400).error({
+        message: errorHandler.getErrorMessage(err)
+      }, message);
+    } else {
+      spark.response(article, message);
+    }
+  });
 };
 
 /**
  * List of Articles
  */
 exports.list = function(spark, message) {
-	Article.find().sort('-created').limit(30).populate('user', 'displayName').exec(function(err, articles) {
-		if (err) {
-			return spark.status(400).response({
-				message: errorHandler.getErrorMessage(err)
-			}, message);
-		} else {
-			spark.response(articles, message);
-		}
-	});
+  Article.find().sort('-created').limit(30).populate('user', 'displayName').exec(function(err, articles) {
+    if (err) {
+      return spark.status(400).response({
+        message: errorHandler.getErrorMessage(err)
+      }, message);
+    } else {
+      spark.response(articles, message);
+    }
+  });
 };
 
 /**
  * Article middleware
  */
 exports.articleByID = function(spark, message, id, cb) {
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-		var err = {
-			message: 'Article is invalid'
-		};
-		spark.status(400).error(err, message);
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    var err = {
+      message: 'Article is invalid'
+    };
+    spark.status(400).error(err, message);
 
-		return cb(err);
-	}
+    return cb(err);
+  }
 
-	Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
-		if (err) return cb(err);
-		if (!article) {
-			err = {
-  				message: 'Article not found'
-  			};
-  			console.log(message);
-			return spark.status(404).error(err, message);
-		}
-		spark.request.article = article;
-		cb();
-	});
+  Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
+    if (err) return cb(err);
+    if (!article) {
+      err = {
+          message: 'Article not found'
+        };
+        console.log(message);
+      return spark.status(404).error(err, message);
+    }
+    spark.request.article = article;
+    cb();
+  });
 };
 
 /**
  * Article authorization middleware
  */
 exports.hasAuthorization = function(spark, message, next) {
-	if (spark.request.article.user.id !== spark.request.user.id) {
-		var err = {
-			message: 'User is not authorized'
-		};
-		spark.status(403).error(err, message);
-		return next();
-	}
-	next();
+  if (spark.request.article.user.id !== spark.request.user.id) {
+    var err = {
+      message: 'User is not authorized'
+    };
+    spark.status(403).error(err, message);
+    return next();
+  }
+  next();
 };
 ```
 
@@ -244,13 +246,13 @@ var articles = require('../controllers/articles.controller.js');
 var users = require('../controllers/users.controller.js');
 
 module.exports = function(app) {
-	crossroads.addRoute('/article/list', articles.list);
-	crossroads.addRoute('/article/create', [users.requiresLogin, articles.create]);
-	crossroads.addRoute('/article/update/{articleId}', [users.requiresLogin, articles.hasAuthorization, articles.update]);
-	crossroads.addRoute('/article/delete/{articleId}', articles.delete);
-	crossroads.addRoute('/article/{articleId}', articles.read);
+  crossroads.addRoute('/article/list', articles.list);
+  crossroads.addRoute('/article/create', [users.requiresLogin, articles.create]);
+  crossroads.addRoute('/article/update/{articleId}', [users.requiresLogin, articles.hasAuthorization, articles.update]);
+  crossroads.addRoute('/article/delete/{articleId}', articles.delete);
+  crossroads.addRoute('/article/{articleId}', articles.read);
 
-	crossroads.param('articleId', articles.articleByID);
+  crossroads.param('articleId', articles.articleByID);
 };
 ```
 

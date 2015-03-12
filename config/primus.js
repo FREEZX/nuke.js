@@ -11,37 +11,37 @@ var response = require('./middleware/primus-response');
 var _ = require('lodash');
 
 module.exports = function(server) {
-	var rtg = url.parse(config.redis);
-	var redisPub = Redis.createClient(rtg.port, rtg.hostname, {return_buffers: true});
-	var redisSub = Redis.createClient(rtg.port, rtg.hostname, {return_buffers: true});
+  var rtg = url.parse(config.redis);
+  var redisPub = Redis.createClient(rtg.port, rtg.hostname, {return_buffers: true});
+  var redisSub = Redis.createClient(rtg.port, rtg.hostname, {return_buffers: true});
 
-	if(rtg.auth){
-		redisPub.auth(rtg.auth.split(':')[1]);
-		redisSub.auth(rtg.auth.split(':')[1]);
-	}
+  if(rtg.auth){
+    redisPub.auth(rtg.auth.split(':')[1]);
+    redisSub.auth(rtg.auth.split(':')[1]);
+  }
 
-	var primus = new Primus(server, { 
-		redis: {
-			pub: redisPub,
-			sub: redisSub
-		},
-		transformer: 'websockets'
-	});
+  var primus = new Primus(server, {
+    redis: {
+      pub: redisPub,
+      sub: redisSub
+    },
+    transformer: 'websockets'
+  });
 
-	primus.before('passport_init', passport.initialize());
-	primus.before('auth', passport.authenticate('jwt', {token: 'query'}));
+  primus.before('passport_init', passport.initialize());
+  primus.before('auth', passport.authenticate('jwt', {token: 'query'}));
 
-	primus.use('response', response);
-	primus.use('redis', PrimusRedisRooms);
+  primus.use('response', response);
+  primus.use('redis', PrimusRedisRooms);
 
-	crossroads.ignoreState = true;
+  crossroads.ignoreState = true;
 
-	primus.on('connection', function(spark){
-		spark.on('data', function(message){
-			if(message.path){
-				spark.request.body = _.omit(message.data, 'seq');
-				crossroads.parse(message.path, [spark, message]);
-			}
-		});
-	});
+  primus.on('connection', function(spark){
+    spark.on('data', function(message){
+      if(message.path){
+        spark.request.body = _.omit(message.data, 'seq');
+        crossroads.parse(message.path, [spark, message]);
+      }
+    });
+  });
 };

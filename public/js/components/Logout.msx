@@ -4,26 +4,26 @@ var AppStore = require('../stores/AppStore');
 
 var Logout = {
   controller: function (event){
-  	var self = this;
+    var self = this;
     m.startComputation();
-  	primus.request('/auth/signout', this.state)
-  	.then(function(data){
+    primus.request('/auth/signout', this.state)
+    .then(function(data){
       AppStore.loggedin(false);
       localStorage.removeItem('nuketoken');
       m.route('/');
       m.endComputation();
-  	})
-  	.fail(function(error){
+    })
+    .fail(function(error){
       AppStore.loggedin(false);
       m.route('/');
       m.endComputation();
-  	});
+    });
   },
   view: function () {
     return (
-    	<div>
+      <div>
         Logging out...
-  		</div>
+      </div>
     );
   }
 };

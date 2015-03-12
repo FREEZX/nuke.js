@@ -25,7 +25,7 @@ exports.signup = function(spark, message) {
   user.provider = 'jwt';
   user.displayName = user.firstName + ' ' + user.lastName;
 
-  // Then save the user 
+  // Then save the user
   user.save(function(err) {
     if (err) {
       spark.status(400).error({message: errorHandler.getErrorMessage(err)}, message);
@@ -66,9 +66,9 @@ exports.signin = function(spark, message) {
           var expireTime = Date.now() + (2 * 60 * 60 * 1000); // 2 hours from now
 
           // generate login token
-          var tokenPayload = { 
+          var tokenPayload = {
             user: user.id,
-            username: user.username, 
+            username: user.username,
             expires: expireTime
           };
           var token = jwt.encode(tokenPayload, config.sessionSecret);
