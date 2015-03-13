@@ -17,7 +17,21 @@ Nuke.js is a full-stack web framework, optimized for high speed transfer with le
 
 ## Getting started
 
-To start up a server with the included sample app, just modify /config/env/development.js with your db url and redis url (if you can start up a local redis and mongo you don't have to change anything) and then run `npm install` and finally start it up with `npm run start-dev` in development mode (This will enable automatic compilation of frontend javascript). On your server you should start it with `npm start`.
+First, you need the nukejs yeoman generator to create a new project, intall it by running
+
+```bash
+npm install -g generator-yeoman
+```
+
+Then, create a new folder where your project will be, `cd` inside it, and execute:
+
+```bash
+yo nukejs
+```
+
+Answer the questions and you'll have a nuke.js project set up.
+
+To start up a server with the included sample app, just modify /config/env/development.js with your mongodbdb url and redis url (if you can start up a local redis and mongo on the default ports you don't have to change anything) and then run `npm install` and finally start it up with `npm run start-dev` in development mode (This will enable automatic compilation of frontend javascript). On your server you should start it with `npm start`.
 
 Let's start with a quick overview of the folder structure:
 ```text
@@ -42,6 +56,12 @@ With structure out of the way, let's check out how our backend works.
 
 ## Backend
 First thing to do when starting a new project is setting up models.
+
+You can generate a model with included controller and routes by executing
+
+```bash
+yo nukejs:module
+```
 
 ### Models
 The frameworks contains a sample mongoose model for article objects out of the box:

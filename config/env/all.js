@@ -10,9 +10,9 @@ module.exports = {
     ttl: 30
   },
   db: {
-    uri: process.env.MONGO_URL || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/remp'
+    uri: process.env.MONGO_URL || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/nukejs-app'
   },
-  cdn_base: process.env.CDN_BASE,
+  cdnBase: process.env.CDN_BASE,
   assets: { //All of these must be contained in the public folder
     js: [
       '/primus/primus.js#nomin#nocdn',
