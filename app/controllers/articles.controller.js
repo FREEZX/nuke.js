@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(spark, message) {
   var article = new Article(message.data);
-  article.user = spark.request.user;
+  article.user = spark.request.user.id;
 
   article.save(function(err) {
     if (err) {
@@ -87,7 +87,8 @@ exports.list = function(spark, message) {
 /**
  * Article middleware
  */
-exports.articleByID = function(spark, message, id, cb) {
+exports.articleByID = function(spark, message, id) {
+  var cb = arguments[arguments.length-1];
   if (!mongoose.Types.ObjectId.isValid(id)) {
     var err = {
       message: 'Article is invalid'
@@ -96,7 +97,6 @@ exports.articleByID = function(spark, message, id, cb) {
 
     return cb(err);
   }
-
   Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
     if (err) return cb(err);
     if (!article) {
@@ -115,6 +115,7 @@ exports.articleByID = function(spark, message, id, cb) {
  */
 exports.hasAuthorization = function(spark, message) {
   var cb = arguments[arguments.length-1];
+
   if (spark.request.article.user.id !== spark.request.user.id) {
     var err = {
       message: 'User is not authorized'

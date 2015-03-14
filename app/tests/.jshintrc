@@ -23,6 +23,7 @@
     "Q": true,
     "Primus": true,
     "primus": true,
+    /* MOCHA */
     "describe"   : true,
     "it"         : true,
     "before"     : true,

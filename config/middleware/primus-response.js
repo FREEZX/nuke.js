@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var Q = require('q');
 
 module.exports = {
   server: function(primus){
@@ -28,6 +29,10 @@ module.exports = {
         data = {};
       }
       var self = primus;
+
+      if(typeof Q === 'undefined' && typeof require !== 'undefined'){
+        Q = require('q');
+      }
       var deferred = Q.defer();
 
       if(self.writable) {
@@ -50,7 +55,7 @@ module.exports = {
           listener({error: 'Server did not respond', seq: seq});
         }, 2000);
         self.on('data', listener);
-        self.write({path: path, data: data, seq: seq}); 
+        self.write({path: path, data: data, seq: seq});
       }
 
       return deferred.promise;
