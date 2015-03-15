@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('lodash');
-var Q = require('q');
 
 module.exports = {
   server: function(primus){
@@ -29,8 +28,8 @@ module.exports = {
         data = {};
       }
       var self = primus;
-
-      if(typeof Q === 'undefined' && typeof require !== 'undefined'){
+      var Q = (typeof(window) !== 'undefined') ? window.Q : null;
+      if(!Q && (typeof require === 'function')){
         Q = require('q');
       }
       var deferred = Q.defer();
