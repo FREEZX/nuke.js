@@ -42,8 +42,7 @@ var go = function(client) {
       });
     });
 
-    // Test if user is able to insert article
-    it('should be able to insert article in articles collection', function(done){
+    it('should be able to insert article', function(done){
       client.request('/article/create', article)
       .then(function(data){
         data._id.should.be.type('string');
@@ -56,8 +55,7 @@ var go = function(client) {
       });
     });
 
-    // Test if user is able to get existing article
-    it('should be able to get article from articles collection by id', function(done){
+    it('should be able to get article by id', function(done){
       var articleObj = new Article(article);
       articleObj.save(function(err, doc){
         client.request('/article/'+doc.id)
@@ -73,8 +71,7 @@ var go = function(client) {
       });
     });
 
-    // Test if user is able to get existing article
-    it('should be able to update article in articles collection by id', function(done){
+    it('should be able to update article by id', function(done){
       var articleObj = new Article(article);
       articleObj.save(function(err, doc){
         article.title = 'Changed Title';
@@ -91,8 +88,7 @@ var go = function(client) {
       });
     });
 
-    // Test if user is able to get existing article
-    it('should be able to delete article in articles collection by id', function(done){
+    it('should be able to delete article by id', function(done){
       var articleObj = new Article(article);
       articleObj.save(function(err, doc){
         client.request('/article/delete/'+doc.id)
