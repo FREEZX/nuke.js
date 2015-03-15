@@ -2,6 +2,7 @@
 
 The superfast full-stack framework
 
+[![Build Status](https://travis-ci.org/FREEZX/nuke.js.svg?branch=master)](https://travis-ci.org/FREEZX/nuke.js)
 [![Dependencies Status](https://david-dm.org/FREEZX/nuke.js.svg)](https://david-dm.org/FREEZX/nuke.js)
 
 Nuke.js is a full-stack web framework, optimized for high speed transfer with less overhead.

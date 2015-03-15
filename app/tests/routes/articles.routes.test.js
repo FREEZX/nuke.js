@@ -101,6 +101,29 @@ var go = function(client) {
         });
       });
     });
+
+    it('should be able to list articles', function(done){
+      var articleObj1 = new Article(article);
+      articleObj1.save(function(err, article1){
+        var articleObj2 = new Article(article);
+        articleObj2.save(function(err, article2){
+          client.request('/article/list', article)
+          .then(function(data){
+            data[0]._id.should.match(article2.id);
+            data[0].title.should.match(article2.title);
+            data[0].content.should.match(article2.content);
+            data[1]._id.should.match(article1.id);
+            data[1].title.should.match(article1.title);
+            data[1].content.should.match(article1.content);
+            done();
+          })
+          .fail(function(data){
+            done(new Error(data));
+          });
+        });
+      });
+
+    });
   });
 };
 
