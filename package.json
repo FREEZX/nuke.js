@@ -20,7 +20,7 @@
     "passport-local": "^1.0.0",
     "passport-strategy": "^1.0.0",
     "pause": "0.0.1",
-    "primus": "^2.4.12",
+    "primus": "^3.0.1",
     "primus-redis-rooms-withauth": "git://github.com/A8tech/primus-redis-rooms",
     "q": "^1.2.0",
     "redis": "^0.12.1",
