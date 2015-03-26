@@ -11,7 +11,7 @@ var config = require('./config/config');
 var srcPath = './public/';
 var destPath = './public/dist/';
 var destCssPath = destPath+'/css/';
-var destJsPath = destPath+'/js/'; 
+var destJsPath = destPath+'/js/';
 
 var srcPathsArray = [];
 
@@ -70,8 +70,12 @@ var buildCssAssets = function(cssPath){
         var matches = rule.declarations[i].value.match(urlsregex);
         if(matches){
           for(var j=0; j<matches.length; ++j) {
-            //Strip braces
-            var nourlMatch = matches[j].match(nourlRegex)[0];
+            var matches2 = matches[j].match(nourlRegex);
+            var nourlMatch = matches[j].substring(4, matches[j].length - 1);
+            if(matches2) {
+              nourlMatch = matches2[0];
+            }
+
             //Strip apostrophe chars
             if(nourlMatch.charAt(0) === '\'') {
               nourlMatch =nourlMatch.substring(1, nourlMatch.length - 1);
