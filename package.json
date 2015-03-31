@@ -47,7 +47,7 @@
     "should": "^5.2.0"
   },
   "scripts": {
-    "prepublish": "bower install && npm run build",
+    "postinstall": "bower install && npm run build",
     "watch": "node_modules/.bin/watchify -o public/js/bundle.js --extension=.msx -v -d .",
     "start": "node_modules/.bin/forever server.js",
     "start-dev": "npm run watch & nodemon server.js",
