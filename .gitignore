@@ -19,6 +19,7 @@ public/lib/
 # ======================
 config/sslcerts/*.pem
 access.log
+public/dist/
 public/js/bundle.js
 
 # Sublime editor

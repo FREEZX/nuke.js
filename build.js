@@ -128,5 +128,7 @@ for(i=0; i<config.assets.js.length; ++i) {
 
 //Minify js
 mkdirp.sync(destJsPath);
+
+console.log('Started building and minifying all included js files. This may take a while, please be patient.');
 var result = UglifyJS.minify(minifyjsfiles);
 fs.writeFileSync(destJsPath+'min.js', result.code);

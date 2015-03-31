@@ -3,11 +3,10 @@
   "version": "0.0.1",
   "description": "High-speed realtime framework",
   "main": "public/js/app.msx",
-  "postinstall": "bower install",
   "dependencies": {
     "async": "^0.9.0",
     "connect-redis": "^2.2.0",
-    "consolidate": "^0.11.0",
+    "consolidate": "^0.12.0",
     "crossroads": "git://github.com/FREEZX/crossroads.js",
     "express": "^4.12.0",
     "forever": "^0.14.1",
@@ -48,6 +47,7 @@
     "should": "^5.2.0"
   },
   "scripts": {
+    "prepublish": "bower install && npm run build",
     "watch": "node_modules/.bin/watchify -o public/js/bundle.js --extension=.msx -v -d .",
     "start": "node_modules/.bin/forever server.js",
     "start-dev": "npm run watch & nodemon server.js",
