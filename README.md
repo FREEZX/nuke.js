@@ -24,7 +24,7 @@ Nuke.js is a full-stack web framework, optimized for high speed transfer with le
 First, you need the nukejs yeoman generator to create a new project, intall it by running
 
 ```bash
-npm install -g generator-yeoman
+npm install -g generator-nukejs
 ```
 
 Then, create a new folder where your project will be, `cd` inside it, and execute:
