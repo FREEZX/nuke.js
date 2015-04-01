@@ -47,10 +47,10 @@
     "should": "^5.2.0"
   },
   "scripts": {
-    "postinstall": "node_modules/.bin/bower install && npm run build",
-    "watch": "node_modules/.bin/watchify -o public/js/bundle.js --extension=.msx -v -d .",
+    "postinstall": "node_modules/.bin/bower install --allow-root --config.interactive=false && npm run build",
+    "watch": "node_modules/.bin/watchify public/js/app.msx -o public/js/bundle.js --extension=.msx -v -d .",
     "start": "node_modules/.bin/forever server.js",
-    "start-dev": "npm run watch & nodemon server.js",
+    "start-dev": "npm run watch & node_modules/.bin/nodemon server.js",
     "build": "NODE_ENV=production node_modules/.bin/browserify -o public/js/bundle.js . --extension=.msx && node ./build.js",
     "test": "NODE_ENV=test node_modules/.bin/mocha -r server.js app/tests/**/*.js"
   },

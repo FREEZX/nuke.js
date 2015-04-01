@@ -3,14 +3,14 @@
 module.exports = {
   appName: 'Nuke.js app',
   port: process.env.PORT || 3000,
-  redis: process.env.REDIS_URL ||'',
+  redis: process.env.REDIS_URL || process.env.REDIS_PORT ||'',
   sessionSecret: 'g1i23fg9as68egj',
   cookie: {},
   cachebox: {
     ttl: 30
   },
   db: {
-    uri: process.env.MONGO_URL || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/nukejs-app'
+    uri: process.env.MONGO_URL || 'mongodb://' + (process.env.MONGO_PORT_27017_TCP_ADDR || 'localhost') + '/nukejs-app'
   },
   cdnBase: process.env.CDN_BASE,
   assets: { //All of these must be contained in the public folder
