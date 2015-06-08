@@ -32,7 +32,7 @@ You will also need `bower` for front-end package management, `watchify` and `bro
 You should install these globally by using the following npm command:
 
 ```bash
-npm install -g bower watchify browserify nodemon forever
+npm install -g bower watchify browserify nodemon forever mocha
 ```
 
 
