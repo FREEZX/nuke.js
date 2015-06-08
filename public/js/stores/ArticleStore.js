@@ -1,5 +1,6 @@
 'use strict';
 var m = require('mithril.elements');
+var AppStore = require('./AppStore');
 var _ = require('lodash');
 
 var ArticleStore = {
@@ -9,8 +10,10 @@ var ArticleStore = {
 ArticleStore.loadArticles = function(){
   m.startComputation();
   primus.request('/article/list').then(function(data){
-    ArticleStore.articles = data; 
-    m.endComputation();
+    ArticleStore.articles = data;
+  })
+  .fin(function(){
+      m.endComputation();
   });
 };
 
@@ -22,16 +25,20 @@ ArticleStore.deleteArticle = function(id){
         return true;
       }
     });
-    m.endComputation();
+  })
+  .fin(function(){
+      m.endComputation();
   });
 };
 
 ArticleStore.newArticle = function(article){
   m.startComputation();
   primus.request('/article/create', article).then(function(data){
-    data.user = ArticleStore.loggedin();
+    data.user = AppStore.loggedin();
     ArticleStore.articles.unshift(data);
-    m.endComputation();
+  })
+  .fin(function(){
+      m.endComputation();
   });
 };
 

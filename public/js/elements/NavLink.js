@@ -1,6 +1,5 @@
 'use strict';
 
-/** @jsx m */
 var m = require('mithril.elements');
 
 var NavLink = m.element('NavLink', {
@@ -10,8 +9,8 @@ var NavLink = m.element('NavLink', {
   },
   view: function(ctrl, content) {
     var className = ctrl.active ? 'active' : '';
-    return <li className={className}>
-      <Link state={ctrl.state}>{content}</Link>
-    </li>;
+    return m('li', {class: className}, 
+      m('Link', {state: ctrl.state}, content)
+    );
   }
 });

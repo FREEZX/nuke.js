@@ -1,6 +1,5 @@
 'use strict';
 
-/** @jsx m */
 var Header = require('./Header');
 var m = require('mithril.elements');
 
@@ -117,26 +116,36 @@ var Benchmarks = {
   view: function (ctrl) {
     return [
       Header.view(),
-      <div className="container">
-        <h2>Websocket technologies benchmarks</h2>
-        <p>We have created a node realtime engine benchmarking tool called <a href="https://github.com/FREEZX/SockBench">SockBench</a> which generated the following graph.<br/>
-        A writeup about our methods and conclusions is available in this <a href="https://www.dropbox.com/s/6dgnftmjcjf2g5o/bare_conf.pdf">scientific paper</a>.</p>
-        <div config={ctrl.socketConfig()}></div>
-        <p>The paper shows that primus is the best possible choice due to great performance, considering it offers effortless switching of realtime engines, and it implements best practices for all supported engines.</p>
-        <p>Nuke.js uses the websockets transformer by default, because it is the fastest transformer available, and does not require sticky sessions support on your load balancer.</p>
-
-        <h2>Primus vs HTTP</h2>
-        <p>This benchmark measures the needed time to make HTTP requests and Primus requests. We took advantage of primus and kept the connection open for all requests. <br/>
-        This highlights the biggest drawback of HTTP, which is that it's not reusing existing connections, but instead makes new connections for every request. <br/>
-        Nuke.js enables you to do promise-based requests with primus, and this is the preferred method you should use to achieve all the high speeds. You can also do classic HTTP requests if you really need them.<br/>
-        To perform the benchmark yourself, check out the project on <a href="https://github.com/FREEZX/PrimusHTTPBench">github</a>.</p>
-        <div config={ctrl.httpVsPrimus()}></div>
-
-        <h2>Mithril vs everything else</h2>
-        <p>Mithril is a very lightweight and fast frontend MVC framework that is simple and easy to use, yet it's also extremely fast. It is included in the default package,
-        but if you feel more comfortable with something else, it is not difficult to switch.</p>
-        <div config={ctrl.mithrilChart()}></div>
-      </div>
+      m('div', {class: 'container'}, [
+        m('h2', 'Websocket technologies benchmarks'),
+        m('p', [
+          'We have created a node realtime engine benchmarking tool called',
+          m('a', {href: 'https://github.com/FREEZX/SockBench'}, 'SockBench'),
+          'which generated the following graph.',
+          m('br'),
+          'A writeup about our methods and conclusions is available in this',
+          m('a', {href: 'https://www.dropbox.com/s/6dgnftmjcjf2g5o/bare_conf.pdf'}, 'scientific paper')
+        ]),
+        m('div', {config: ctrl.socketConfig()}),
+        m('p', 'The paper shows that primus is the best possible choice due to great performance, considering it offers effortless switching of realtime engines, and it implements best practices for all supported engines.'),
+        m('p', 'Nuke.js uses the websockets transformer by default, because it is the fastest transformer available, and does not require sticky sessions support on your load balancer.'),
+        m('h2', 'Primus vs HTTP'),
+        m('p', [
+          'This benchmark measures the needed time to make HTTP requests and Primus requests. We took advantage of primus and kept the connection open for all requests.',
+          m('br'),
+          'This highlights the biggest drawback of HTTP, which is that it\'s not reusing existing connections, but instead makes new connections for every request.',
+          m('br'),
+          'Nuke.js enables you to do promise-based requests with primus, and this is the preferred method you should use to achieve all the high speeds. You can also do classic HTTP requests if you really need them.',
+          m('br'),
+          'To perform the benchmark yourself, check out the project on ',
+          m('a', {href: 'https://github.com/FREEZX/PrimusHTTPBench'}, 'github'),
+          '.'
+        ]),
+        m('div', {config: ctrl.httpVsPrimus()}),
+        m('h2', 'Mithril vs everything else'),
+        m('p', 'Mithril is a very lightweight and fast frontend MVC framework that is simple and easy to use, yet it\'s also extremely fast. It is included in the default package, but if you feel more comfortable with something else, it is not difficult to switch.'),
+        m('div', {config: ctrl.mithrilChart()})
+      ])
     ];
   }
 };

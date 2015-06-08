@@ -11,20 +11,13 @@ var Logout = {
       AppStore.loggedin(false);
       localStorage.removeItem('nuketoken');
       m.route('/');
-      m.endComputation();
     })
-    .fail(function(error){
-      AppStore.loggedin(false);
-      m.route('/');
+    .fin(function(){
       m.endComputation();
     });
   },
   view: function () {
-    return (
-      <div>
-        Logging out...
-      </div>
-    );
+    return m('div', 'Logging out...');
   }
 };
 

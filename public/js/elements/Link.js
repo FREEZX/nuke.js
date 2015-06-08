@@ -1,6 +1,5 @@
 'use strict';
 
-/** @jsx m */
 var m = require('mithril.elements');
 
 var Link = m.element('Link', {
@@ -11,6 +10,6 @@ var Link = m.element('Link', {
   },
   view: function(ctrl, content) {
   	var config = ctrl.state.href ? undefined : m.route;
-    return <a href={ctrl.state.to || ctrl.state.href} config={config}>{content}</a>;
+    return m('a', {href: (ctrl.state.to || ctrl.state.href), config:config}, content);
   }
 });

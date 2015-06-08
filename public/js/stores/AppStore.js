@@ -11,6 +11,7 @@ AppStore.getLoggedUser = function(){
   m.startComputation();
   primus.request('/users/me').then(function(data){
     AppStore.loggedin(data);
+  }).fin(function(){
     m.endComputation();
   });
 };

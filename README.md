@@ -27,6 +27,16 @@ First, you need the nukejs yeoman generator to create a new project, intall it b
 npm install -g generator-nukejs
 ```
 
+You will also need `bower` for front-end package management, `watchify` and `browserify` for building of front-end sources, `nodemon` for auto-restarting of your app when sources are changed, `forever` for starting the app and auto restarting if it crashes for any reason, as well as `mocha` for running unit tests.
+
+You should install these globally by using the following npm command:
+
+```bash
+npm install -g bower watchify browserify nodemon forever
+```
+
+
+
 Then, create a new folder where your project will be, `cd` inside it, and execute:
 
 ```bash
@@ -288,7 +298,7 @@ To see how one such preprocessing could be done, refer to the `articleById` func
 
 ## Client
 
-For the client side we have some initial mithril code that builds with [mithrilify](https://github.com/sectore/mithrilify), which you can modify and change to work as you please, the only important thing to note here is the way requests are made.
+For the client side we have some initial mithril code, which you can modify and change to work as you please, the only important thing to note here is the way requests are made.
 Our framework exposes a custom `primus.request()` function, which takes two arguments, `path` and `data`, and returns a Q `promise`. The promise is either resolved or rejected depending on whether you have called `spark.response` or `spark.error` on the server, respectively.
 You could also choose to use a different front-end framework if you wish, you should just modify `package.json` with updated building options.
 
