@@ -7,3 +7,5 @@ env:
 services:
   - mongodb
   - redis
+before_install:
+  - "npm install -g bower watchify browserify nodemon forever"
