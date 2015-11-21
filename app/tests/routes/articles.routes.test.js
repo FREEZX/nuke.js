@@ -10,6 +10,13 @@ var article;
 
 var go = function(client) {
   describe('Article Routes Unit Tests', function() {
+    before(function(done) {
+      Article.remove().exec(function(){
+        User.remove().exec(function(){
+          done();
+        });
+      });
+    });
     beforeEach(function(done) {
       // Try to login the user via the socket
       var user = new User({
@@ -123,6 +130,38 @@ var go = function(client) {
         });
       });
 
+    });
+
+    it('should be able to watch articles', function(done) {
+      client.request('/article/watch')
+      .then(function(data) {
+        done();
+      })
+      .fail(function(data) {
+        done(new Error(data));
+      });
+    });
+
+    it('should be able to receive data for new articles', function(done) {
+      client.request('/article/create', article);
+      client.on('data', function(data){
+        if(data.data.type === 'watch' && data.data.data.title === 'Title') {
+          done();
+        }
+      });
+    });
+
+    it('should be able to receive data for updated articles', function(done) {
+      var articleObj = new Article(article);
+      articleObj.save(function(err, doc){
+        article.title = 'Changed Title';
+        client.request('/article/update/'+doc.id, article);
+      });
+      client.on('data', function(data){
+        if(data.data.type === 'watch' && data.data.data.title === 'Changed Title') {
+          done();
+        }
+      });
     });
   });
 };

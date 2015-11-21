@@ -22,6 +22,9 @@ exports.create = function(spark, message) {
       }, message);
     } else {
       spark.response(article, message);
+
+      //Notify other users of the new article
+      spark.primus.broadcast('articles', article);
     }
   });
 };
@@ -48,6 +51,7 @@ exports.update = function(spark, message) {
       }, message);
     } else {
       spark.response(article, message);
+      spark.primus.broadcast('articles', article);
     }
   });
 };
@@ -82,6 +86,18 @@ exports.list = function(spark, message) {
       spark.response(articles, message);
     }
   });
+};
+
+exports.watch = function(spark, message) {
+  //Watch for new articles
+  spark.join('articles', function(data) {
+    spark.status(200).response({
+      type: 'watch',
+      data: data
+    });
+  });
+
+  spark.status(200).response(true, message);
 };
 
 /**

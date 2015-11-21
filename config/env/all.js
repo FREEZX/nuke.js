@@ -4,6 +4,11 @@ module.exports = {
   appName: 'Nuke.js app',
   port: process.env.PORT || 3000,
   redis: process.env.REDIS_URL || process.env.REDIS_PORT ||'',
+  nats: {
+    url: process.env.NATS_URL || 'nats://127.0.0.1:4222',
+    user: process.env.NATS_USER,
+    pass: process.env.NATS_PASS
+  },
   sessionSecret: 'g1i23fg9as68egj',
   cookie: {},
   cachebox: {

@@ -11,7 +11,7 @@ module.exports = {
       return this;
     };
     Spark.prototype.response = function (message, reqmsg) {
-      var seq = reqmsg.seq || 0;
+      var seq = reqmsg && reqmsg.seq ? reqmsg.seq : 0;
       this.write({status: this._status, data: message, seq: seq});
       this._status = 200;
     };

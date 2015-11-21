@@ -1,8 +1,8 @@
 'use strict';
 
 var Primus = require('primus');
-var Redis = require('redis');
-var PrimusRedisRooms = require('primus-redis-rooms-withauth');
+var Nats = require('./nats.js')
+var primusNats = require('primus-nats');
 var url = require('url');
 var crossroads = require('crossroads');
 var passport = require('passport');
@@ -11,20 +11,9 @@ var response = require('./middleware/primus-response');
 var _ = require('lodash');
 
 module.exports = function(server) {
-  var rtg = url.parse(config.redis);
-  var redisPub = Redis.createClient(rtg.port, rtg.hostname, {return_buffers: true});
-  var redisSub = Redis.createClient(rtg.port, rtg.hostname, {return_buffers: true});
-
-  if(rtg.auth){
-    redisPub.auth(rtg.auth.split(':')[1]);
-    redisSub.auth(rtg.auth.split(':')[1]);
-  }
 
   var primus = new Primus(server, {
-    redis: {
-      pub: redisPub,
-      sub: redisSub
-    },
+    nats: Nats,
     transformer: 'websockets'
   });
 
@@ -32,7 +21,7 @@ module.exports = function(server) {
   primus.before('auth', passport.authenticate('jwt', {token: 'query'}));
 
   primus.use('response', response);
-  primus.use('redis', PrimusRedisRooms);
+  primus.use('nats', primusNats);
 
   crossroads.ignoreState = true;
 
