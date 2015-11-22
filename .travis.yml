@@ -8,6 +8,6 @@ services:
   - mongodb
 before_install:
   - "wget https://github.com/nats-io/gnatsd/releases/download/v0.6.8/gnatsd-v0.6.8-linux-amd64.tar.gz -O ~/gnatsd.tar.gz"
-  - "tar -xvzf ~/gnatsd.tar.gz -C ~/gnatsd"
+  - "mkdir ~/gnatsd && tar -xvzf ~/gnatsd.tar.gz -C ~/gnatsd"
   - "nohup exec ~/gnatsd/gnatsd"
   - "npm install -g bower watchify browserify nodemon forever mocha"
