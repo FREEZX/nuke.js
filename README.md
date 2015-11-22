@@ -45,7 +45,7 @@ yo nukejs
 
 Answer the questions and you'll have a nuke.js project set up.
 
-To start up a server with the included sample app, just modify /config/env/development.js with your mongodbdb url and redis url (if you can start up a local redis and mongo on the default ports you don't have to change anything) and then run `npm install` and finally start it up with `npm run start-dev` in development mode (This will enable automatic compilation of frontend javascript). On your server you should start it with `npm start`.
+To start up a server with the included sample app, just modify /config/env/development.js with your mongodbdb url and NATS url (if you can start up a local NATS and mongo on the default ports you don't have to change anything) and then run `npm install` and finally start it up with `npm run start-dev` in development mode (This will enable automatic compilation of frontend javascript). On your server you should start it with `npm start`.
 
 Let's start with a quick overview of the folder structure:
 ```text
@@ -258,7 +258,16 @@ exports.hasAuthorization = function(spark, message, next) {
 
 As you can see, most of these functions probably differ from what you may be used to, mainly in their parameters. Our controller functions take `spark` and `message` as their parameters:
 
-`spark` contains the raw primus spark object which has sent the message. In the spark's `request` field, you may find the raw request data as well as the `user` object (set by passport), if the user is logged in. If you need to add new fields that should persist during one connection, the `primus` object is where you could put them.
+`spark` contains the raw primus spark object which has sent the message. In the spark's `request` field, you may find the raw request data as well as the `user` object (set by passport), if the user is logged in. If you need to add new fields that should persist during one connection, the `primus` object is where you could put them. Additionally, we have included a rooms functionality.
+You can do:
+```
+spark.join('roomname', function cb(data){
+  console.log('received room message');
+});
+```
+
+And on another place you can do `spark.primus.broadcast('roomname', 'message')`. The spark's join callback will receive the message sent by, for example another spark to a specific room.
+This functionality is based on [primus-nats](https://github.com/FREEZX/primus-nats). It's basic, but gets the job done, and allows for easy transfer of data between sparks across servers.
 
 `message` contains the whole raw message that the has been sent from the browser. The data you're sending from your client scripts is located in `message.data` (this is your message body), whereas `message.route` and `message.seq` contain the requested route and message sequence number accordingly. Most often you will only need `message.data`.
 
