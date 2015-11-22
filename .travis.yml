@@ -4,6 +4,7 @@ node_js:
   - "iojs"
 env:
   - NODE_ENV=travis
+  - CXX=g++-4.8
 addons:
   apt:
     sources:
