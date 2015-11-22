@@ -10,10 +10,10 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+      - libkrb5-dev
 services:
   - mongodb
 before_install:
-  - "apt-get install libkrb5-dev"
   - "wget https://github.com/nats-io/gnatsd/releases/download/v0.6.8/gnatsd-v0.6.8-linux-amd64.tar.gz -O ~/gnatsd.tar.gz"
   - "mkdir ~/gnatsd && tar -xvzf ~/gnatsd.tar.gz -C ~/gnatsd"
   - "nohup ~/gnatsd/gnatsd &"
