@@ -1,0 +1,21 @@
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  nodesecurity:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        javascript:
+          mass_threshold: 20
+ratings:
+  paths:
+  - app/**
+  - config/**
+  - "**.js"
+exclude_paths:
+- public/**/*
+- node_modules/**/*
