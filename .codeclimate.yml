@@ -9,12 +9,11 @@ engines:
     enabled: true
     config:
       languages:
-        javascript:
-          mass_threshold: 20
+      - javascript
 ratings:
   paths:
-  - app/**
-  - config/**
+  - "app/**/*"
+  - "config/**"
   - "**.js"
 exclude_paths:
 - public/**/*
