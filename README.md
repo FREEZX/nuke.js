@@ -11,6 +11,8 @@ The superfast full-stack framework
 Nuke.js is a full-stack web framework, optimized for high speed transfer with less overhead.
 
 ## Features
+
+[![Join the chat at https://gitter.im/FREEZX/nuke.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FREEZX/nuke.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  - Mongoose models
  - Express dynamic pages
  - Mongoose models
