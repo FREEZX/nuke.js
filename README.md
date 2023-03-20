@@ -1,5 +1,3 @@
-[![Logo](http://nukejs.com/img/logo.png)](http://nukejs.com/)
-
 The superfast full-stack framework
 
 [![Build Status](https://travis-ci.org/FREEZX/nuke.js.svg?branch=master)](https://travis-ci.org/FREEZX/nuke.js)
